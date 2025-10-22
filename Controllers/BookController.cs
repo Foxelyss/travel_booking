@@ -17,28 +17,31 @@ namespace TravelBooking.Controllers
           )
         {
         }
-        [HttpGet("bookings")]
+        [HttpGet("/bookings")]
         public List<Ticket> GetTicketsForUser(String email, long passport)
         {
-            return bookService.findAllByDetails(email, passport);
+            return null;
         }
 
         [HttpPost("book")]
         public String Book(int transporting, String name, String surname, String middle_name, String email, long passport, long phone)
         {
-            bookService.createItem(new Passenger(phone, email, surname, name, middle_name, passport), transporting);
 
             return "Success";
         }
 
-        [HttpPost("/return")]
+        [HttpPost("return")]
         public String ReturnTicket(String email, long passport, long id)
         {
-            bookService.deleteItem(email, passport, id);
 
             return "Success";
         }
 
+        [HttpPost("echo")]
+        public Transporting ReturnTicket(Transporting transporting)
+        {
+            return transporting;
+        }
         //     @ResponseStatus(HttpStatus.BAD_REQUEST)
         // @ExceptionHandler
         // public String handleBookingException(BookingException ex)

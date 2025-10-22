@@ -13,9 +13,9 @@ namespace TravelBooking.Controllers
         {
 
             var point = new Point(-1, name, region, town);
-            await transportService.AddItemAsync(point);
+            // await transportService.AddItemAsync(point);
 
-            return Ok();
+            return (IActionResult)Results.Ok();
         }
 
         [HttpPost("/create_company")]
@@ -26,9 +26,9 @@ namespace TravelBooking.Controllers
                 [FromQuery] string phone)
         {
             var company = new Company(-1, name, address, inn, phone);
-            await companyService.AddItemAsync(company);
+            // await companyService.AddItemAsync(company);
 
-            return Ok();
+            return (IActionResult)Results.Ok();
         }
     }
 }

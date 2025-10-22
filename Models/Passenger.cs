@@ -1,0 +1,30 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace TravelBooking.Models;
+
+
+public class Passenger
+{
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    public long Passport { get; set; }
+
+    [Required]
+    [MaxLength(32)]
+    public string Firstname { get; set; }
+
+    [Required]
+    [MaxLength(32)]
+    public string Surname { get; set; }
+
+    [MaxLength(32)]
+    public string Lastname { get; set; }
+
+    public int AccountId { get; set; }
+
+    public virtual Account Account { get; set; }
+}
+
+

@@ -20,25 +20,29 @@ namespace TravelBooking.Controllers
         [HttpGet("point")]
         public Point searchForPoint(String point = "Томск")
         {
-            return pointService.findByName(point);
+            // return pointService.findByName(point);
+            return null;
         }
 
         [HttpGet("points")]
         public List<Point> searchForPoints()
         {
-            return pointService.getAllItems();
+            return null;
+            // return pointService.getAllItems();
         }
 
         [HttpGet("means")]
         public List<Mean> searchForMeans()
         {
-            return transportService.getAllTransportingMeans();
+            return null;
+            // return transportService.getAllTransportingMeans();
         }
 
         [HttpGet("search")]
         public List<TransportingResult> searchForTransport(int point_a, int point_b, int quantity, long wanted_time, int mean, int page)
         {
-            return transportService.findByDest(point_a, point_b, quantity, wanted_time, mean, page);
+            return null;
+            // return transportService.findByDest(point_a, point_b, quantity, wanted_time, mean, page);
         }
     }
 }
