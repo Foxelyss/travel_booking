@@ -1,9 +1,17 @@
+using TravelBooking.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("TravelBooking.db");
+builder.Services.AddSqlite<StoreContext>(connectionString);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
