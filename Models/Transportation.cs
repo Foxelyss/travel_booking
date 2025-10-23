@@ -10,7 +10,7 @@ public class Transportation
 
     [Required]
     [MaxLength(128)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     public DateTime Departure { get; set; }
@@ -35,7 +35,7 @@ public class Transportation
     [Required]
     public uint FreePlaceCount { get; set; }
 
-    public virtual Point DeparturePoint { get; set; }
-    public virtual Point ArrivalPoint { get; set; }
-    public virtual Company Company { get; set; }
+    public virtual Point? DeparturePoint { get; set; }
+    public virtual Point? ArrivalPoint { get; set; }
+    public virtual Company? Company { get; set; }
 }

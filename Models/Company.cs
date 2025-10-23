@@ -10,17 +10,17 @@ public class Company
 
     [Required]
     [MaxLength(128)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     [MaxLength(128)]
-    public string Inn { get; set; }
+    public required string Inn { get; set; }
 
     [Required]
     [MaxLength(128)]
-    public string RegistrationAddress { get; set; }
+    public required string RegistrationAddress { get; set; }
 
     [Required]
     [MaxLength(128)]
-    public string Phone { get; set; }
+    public required string Phone { get; set; }
 }

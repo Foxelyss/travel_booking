@@ -13,12 +13,12 @@ public class Account
 
     [Required]
     [MaxLength(128)]
-    public string Email { get; set; }
+    public required string Email { get; set; }
 
     [Required]
     [MaxLength(255)]
-    public string PasswordHash { get; set; }
+    public required string PasswordHash { get; set; }
 
     [MaxLength(256)]
-    public string Username { get; set; }
+    public string? Username { get; set; }
 }

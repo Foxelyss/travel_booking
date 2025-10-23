@@ -10,5 +10,5 @@ public class Status
 
     [Required]
     [MaxLength(128)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }

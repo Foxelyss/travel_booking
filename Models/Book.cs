@@ -12,16 +12,16 @@ public class Book
 
     [Required]
     [MaxLength(128)]
-    public string Payment { get; set; }
+    public required string Payment { get; set; }
 
     [Required]
     public float Price { get; set; }
 
     public int TransportationId { get; set; }
 
-    public virtual Passenger Passenger { get; set; }
-    public virtual Transportation Transportation { get; set; }
+    public virtual Passenger? Passenger { get; set; }
+    public virtual Transportation? Transportation { get; set; }
 
     public int StatusId;
-    public virtual Status Status { get; set; }
+    public virtual Status? Status { get; set; }
 }

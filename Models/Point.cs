@@ -10,13 +10,13 @@ public class Point
 
     [Required]
     [MaxLength(128)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     [MaxLength(128)]
-    public string Region { get; set; }
+    public required string Region { get; set; }
 
     [Required]
     [MaxLength(128)]
-    public string City { get; set; }
+    public required string City { get; set; }
 }

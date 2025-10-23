@@ -13,18 +13,18 @@ public class Passenger
 
     [Required]
     [MaxLength(32)]
-    public string Firstname { get; set; }
+    public required string Firstname { get; set; }
 
     [Required]
     [MaxLength(32)]
-    public string Surname { get; set; }
+    public required string Surname { get; set; }
 
     [MaxLength(32)]
-    public string Lastname { get; set; }
+    public required string Lastname { get; set; }
 
     public int AccountId { get; set; }
 
-    public virtual Account Account { get; set; }
+    public virtual Account? Account { get; set; }
 }
 
 

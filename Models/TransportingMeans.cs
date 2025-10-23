@@ -13,6 +13,6 @@ public class TransportingMeans
 
     public int Transport { get; set; }
 
-    public virtual TransportingMean TransportingMean { get; set; }
-    public virtual Transportation Transportation { get; set; }
+    public virtual TransportingMean? TransportingMean { get; set; }
+    public virtual Transportation? Transportation { get; set; }
 }
