@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TravelBooking.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/transport")]
     [ApiController]
     public class TransportController : ControllerBase
     {

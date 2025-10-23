@@ -6,17 +6,30 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
+using TravelBooking.Data;
+using TravelBooking.DTO;
+using TravelBooking.Models;
 
 namespace TravelBooking.Controllers;
 
 public class AuthController : Controller
 {
+    private readonly StoreContext _context;
+
+    public AuthController(StoreContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
     public ActionResult Index()
     {
         return View();
     }
 
-    [HttpPost("login")]
+
+
+    [HttpPost("api/login")]
     public IResult Login(HttpContext context)
     {
         // получаем из формы email и пароль
@@ -28,7 +41,7 @@ public class AuthController : Controller
         string email = form["email"];
         string password = form["password"];
 
-        var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
+        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
 
         var jwt = new JwtSecurityToken(
                 issuer: AuthOptions.ISSUER,
@@ -40,7 +53,7 @@ public class AuthController : Controller
         return Results.Ok(new { access_token = new JwtSecurityTokenHandler().WriteToken(jwt) });
     }
 
-    [HttpPost("auth")]
+    [HttpPost("login")]
     public async Task<IResult> Authorize(string? returnUrl, HttpContext context)
     {
         // получаем из формы email и пароль
@@ -66,30 +79,22 @@ public class AuthController : Controller
         return Results.Redirect(returnUrl ?? "/");
     }
 
-    [HttpPost("auth")]
-    public async Task<IResult> Register(string? returnUrl, HttpContext context)
+    [HttpPost("register")]
+    [Consumes("application/json")]
+    public IResult Register([FromBody] AccountRegistration accountRegistration)
     {
-        // получаем из формы email и пароль
-        var form = context.Request.Form;
-        // если email и/или пароль не установлены, посылаем статусный код ошибки 400
-        if (!form.ContainsKey("email") || !form.ContainsKey("password"))
-            return Results.BadRequest("Email и/или пароль не установлены");
+        Console.WriteLine("Why", accountRegistration);
+        var account = new Account
+        {
+            Email = accountRegistration.Email,
+            PasswordHash = accountRegistration.PasswordHash,
+            Phone = accountRegistration.Phone,
+            Username = accountRegistration.Username ?? accountRegistration.Email
+        };
+        _context.Accounts.Add(account);
 
-        string email = form["email"];
-        string password = form["password"];
-
-        // находим пользователя 
-        // Person? person = people.FirstOrDefault(p => p.Email == email && p.Password == password);
-        // если пользователь не найден, отправляем статусный код 401
-        // if (person is null) return Results.Unauthorized();
-
-        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
-
-        // создаем объект ClaimsIdentity
-        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-        // установка аутентификационных куки
-        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-        return Results.Redirect(returnUrl ?? "/");
+        _context.SaveChanges();
+        return Results.Ok(account);
     }
 }
 
