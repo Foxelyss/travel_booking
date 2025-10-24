@@ -7,25 +7,25 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        [HttpPost("/")]
+        [HttpPost("")]
         public void AddCompany(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
         {
 
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public void GetCompany(int id)
         {
 
         }
 
-        [HttpPatch("/{id}")]
+        [HttpPatch("{id}")]
         public void EditCompany(int id)
         {
 
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public void RemoveCompany(int id)
         {
 

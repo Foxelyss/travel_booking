@@ -19,7 +19,7 @@ namespace TravelBooking.Controllers
         }
 
         [Authorize]
-        [HttpGet("/bookings")]
+        [HttpGet("bookings")]
         public List<Ticket> GetTicketsForUser(String email, long passport)
         {
             return null;

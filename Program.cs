@@ -12,10 +12,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("StoreContext");
 builder.Services.AddSqlite<StoreContext>(connectionString);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/auth");
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -37,9 +34,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
         };
     });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/login");
 builder.Services.AddAuthorization();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+app.MapControllerRoute(
+name: "auth",
+pattern: "{controller=Auth}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "administration",
@@ -62,8 +66,14 @@ name: "company",
 pattern: "{controller=Company}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-name: "auth",
-pattern: "{controller=Auth}/{action=Index}/{id?}");
+name: "mean",
+pattern: "{controller=Mean}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+name: "point",
+pattern: "{controller=Point}/{action=Index}/{id?}");
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -77,6 +87,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -7,7 +7,7 @@ using TravelBooking.Models;
 
 namespace TravelBooking.Controllers
 {
-    [Route("api/transport")]
+    [Route("api/point")]
     [ApiController]
     public class PointController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace TravelBooking.Controllers
             return (Point)_context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%")).Take(1);
         }
 
-        [HttpGet("/name/{name}")]
+        [HttpGet("name/{name}")]
         public IEnumerable<Point> searchForPoints(string name)
         {
             return _context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%"));
@@ -37,19 +37,19 @@ namespace TravelBooking.Controllers
 
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public Point GetPoint(int id)
         {
             return _context.Points.Find(id);
         }
 
-        [HttpPatch("/{id}")]
+        [HttpPatch("{id}")]
         public void EditTransporting(int id)
         {
 
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public void RemoveTransporting(int id)
         {
             Point point = new Point() { Id = id, Name = "", Region = "", City = "" };

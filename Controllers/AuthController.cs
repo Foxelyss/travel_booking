@@ -56,15 +56,16 @@ public class AuthController : Controller
     }
 
     [HttpPost("login")]
-    public async Task<IResult> Authorize(string? returnUrl, HttpContext context)
+    public async Task Authorize(string? returnUrl)
     {
         // получаем из формы email и пароль
-        var form = context.Request.Form;
+        var form = HttpContext.Request.Form;
         // если email и/или пароль не установлены, посылаем статусный код ошибки 400
-        if (!form.ContainsKey("email") || !form.ContainsKey("password"))
-            return Results.BadRequest("Email и/или пароль не установлены");
+        if (!form.ContainsKey("username") || !form.ContainsKey("password"))
+            // return Results.BadRequest("Email и/или пароль не установлены");
+            ;
 
-        string email = form["email"];
+        string email = form["username"];
         string password = form["password"];
 
         // находим пользователя 
@@ -77,8 +78,13 @@ public class AuthController : Controller
         // создаем объект ClaimsIdentity
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
         // установка аутентификационных куки
-        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-        return Results.Redirect(returnUrl ?? "/");
+        var prop = new AuthenticationProperties()
+        {
+            RedirectUri = "/Index"
+        };
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), prop);
+        // return Results.Redirect(returnUrl ?? "/");
+        // await HttpContext.SignInAsync("oidc", );
     }
 
     [HttpPost("register")]
@@ -108,6 +114,19 @@ public class AuthController : Controller
     public IResult AboutUser()
     {
         return Results.Ok(HttpContext.User.HasClaim(ClaimTypes.Role, "regular"));
+    }
+
+    [HttpGet("logout")]
+    [Authorize]
+    public async Task Logout(string? returnUrl)
+    {
+        Console.WriteLine("asdfa!@!");
+        var prop = new AuthenticationProperties()
+        {
+            RedirectUri = "index.html"
+        };
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync("oidc", prop);
     }
 }
 

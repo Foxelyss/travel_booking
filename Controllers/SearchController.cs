@@ -18,6 +18,7 @@ namespace TravelBooking.Controllers
         {
             _context = context;
         }
+
         public record TransportingResult(int id, String name, DateTime start, DateTime end,
                                          String startPoint, String endPoint,
                                          int arr, int dep, float price, String mean,

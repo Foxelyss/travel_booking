@@ -3,23 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TravelBooking.Controllers
 {
-    [Route("api/transport")]
+    [Route("api/mean")]
     [ApiController]
     public class MeanController : ControllerBase
     {
-        [HttpPost("/")]
+        [HttpPost("")]
         public void AddTransporting(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
         {
 
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public void AddTransporting(int id)
         {
 
         }
 
-        [HttpPatch("/{id}")]
+        [HttpPatch("{id}")]
         public void EditTransporting(int id)
         {
 
