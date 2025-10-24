@@ -12,7 +12,7 @@ namespace TravelBooking.Controllers
                    [FromQuery] string town)
         {
 
-            var point = new Point(-1, name, region, town);
+            var point = new PointRegistration(-1, name, region, town);
             // await transportService.AddItemAsync(point);
 
             return (IActionResult)Results.Ok();
@@ -25,7 +25,7 @@ namespace TravelBooking.Controllers
                 [FromQuery] string inn,
                 [FromQuery] string phone)
         {
-            var company = new Company(-1, name, address, inn, phone);
+            var company = new CompanyRegistration(-1, name, address, inn, phone);
             // await companyService.AddItemAsync(company);
 
             return (IActionResult)Results.Ok();

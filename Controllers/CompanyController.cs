@@ -14,7 +14,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("/{id}")]
-        public void AddCompany(int id)
+        public void GetCompany(int id)
         {
 
         }

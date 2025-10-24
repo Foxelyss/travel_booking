@@ -1,6 +1,6 @@
 namespace TravelBooking.DTO;
 
-public record Transporting(
+public record TransportingRegistration(
         int id,
         String name,
         DateTime departure,

@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
@@ -29,9 +30,10 @@ public class AuthController : Controller
 
 
 
-    [HttpPost("api/login")]
-    public IResult Login(HttpContext context)
+    [HttpPost("api/auth/login")]
+    public IResult Login()
     {
+        HttpContext context = HttpContext;
         // получаем из формы email и пароль
         var form = context.Request.Form;
         // если email и/или пароль не установлены, посылаем статусный код ошибки 400
@@ -41,13 +43,13 @@ public class AuthController : Controller
         string email = form["email"];
         string password = form["password"];
 
-        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
+        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email), new Claim(ClaimTypes.Role, "regular") };
 
         var jwt = new JwtSecurityToken(
                 issuer: AuthOptions.ISSUER,
                 audience: AuthOptions.AUDIENCE,
                 claims: claims,
-                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(4)),
                 signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
         return Results.Ok(new { access_token = new JwtSecurityTokenHandler().WriteToken(jwt) });
@@ -70,7 +72,7 @@ public class AuthController : Controller
         // если пользователь не найден, отправляем статусный код 401
         // if (person is null) return Results.Unauthorized();
 
-        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
+        var claims = new List<Claim> { new Claim(ClaimTypes.Name, email), new Claim(ClaimTypes.Role, "regular") };
 
         // создаем объект ClaimsIdentity
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
@@ -83,18 +85,24 @@ public class AuthController : Controller
     [Consumes("application/json")]
     public IResult Register([FromBody] AccountRegistration accountRegistration)
     {
-        Console.WriteLine("Why", accountRegistration);
         var account = new Account
         {
-            Email = accountRegistration.Email,
-            PasswordHash = accountRegistration.PasswordHash,
-            Phone = accountRegistration.Phone,
-            Username = accountRegistration.Username ?? accountRegistration.Email
+            Email = accountRegistration.email,
+            PasswordHash = accountRegistration.password,
+            Phone = accountRegistration.phone,
+            Username = accountRegistration.username ?? accountRegistration.email
         };
         _context.Accounts.Add(account);
 
         _context.SaveChanges();
         return Results.Ok(account);
+    }
+
+    [HttpGet("api/auth/about")]
+    [Authorize]
+    public IResult AboutUser()
+    {
+        return Results.Ok(HttpContext.User.HasClaim(ClaimTypes.Role, "regular"));
     }
 }
 

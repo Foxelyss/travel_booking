@@ -37,11 +37,11 @@ namespace TravelBooking.Controllers
             return "Success";
         }
 
-        [HttpPost("echo")]
-        public Transporting ReturnTicket(Transporting transporting)
-        {
-            return transporting;
-        }
+        // [HttpPost("echo")]
+        // public Transporting ReturnTicket(Transporting transporting)
+        // {
+        //     return transporting;
+        // }
         //     @ResponseStatus(HttpStatus.BAD_REQUEST)
         // @ExceptionHandler
         // public String handleBookingException(BookingException ex)
