@@ -85,6 +85,11 @@ public class AuthController : Controller
     [Consumes("application/json")]
     public IResult Register([FromBody] AccountRegistration accountRegistration)
     {
+        if (!ModelState.IsValid)
+        {
+            return Results.BadRequest(ModelState);
+        }
+
         var account = new Account
         {
             Email = accountRegistration.email,

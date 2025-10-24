@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.DTO;
@@ -8,7 +9,6 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        // Logger logger = LoggerFactory.Create(BookController.class);
         public record Ticket(int id, String name, int transporting,
                                DateTime start, DateTime end, String startPoint,
                                String endPoint, float price,
@@ -17,12 +17,15 @@ namespace TravelBooking.Controllers
           )
         {
         }
+
+        [Authorize]
         [HttpGet("/bookings")]
         public List<Ticket> GetTicketsForUser(String email, long passport)
         {
             return null;
         }
 
+        [Authorize]
         [HttpPost("book")]
         public String Book(int transporting, String name, String surname, String middle_name, String email, long passport, long phone)
         {
@@ -30,31 +33,12 @@ namespace TravelBooking.Controllers
             return "Success";
         }
 
+        [Authorize]
         [HttpPost("return")]
-        public String ReturnTicket(String email, long passport, long id)
+        public String ReturnTicket(long id)
         {
 
             return "Success";
         }
-
-        // [HttpPost("echo")]
-        // public Transporting ReturnTicket(Transporting transporting)
-        // {
-        //     return transporting;
-        // }
-        //     @ResponseStatus(HttpStatus.BAD_REQUEST)
-        // @ExceptionHandler
-        // public String handleBookingException(BookingException ex)
-        //     {
-        //         return ex.getMessage();
-        //     }
-
-        //     @ResponseStatus(HttpStatus.BAD_REQUEST)
-        // @ExceptionHandler
-        // public void handleException(Exception ex)
-        //     {
-        //         logger.error(ex.getMessage());
-        //     }
-        // }
     }
 }

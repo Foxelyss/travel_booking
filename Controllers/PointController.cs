@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TravelBooking.Data;
 using TravelBooking.DTO;
 using TravelBooking.Models;
 
@@ -10,28 +12,35 @@ namespace TravelBooking.Controllers
     public class PointController : ControllerBase
     {
 
+        private readonly StoreContext _context;
+
+        public PointController(StoreContext context)
+        {
+            _context = context;
+        }
+
 
         [HttpGet("point")]
-        public Point searchForPoint(String point = "Томск")
+        public Point searchForPoint(string name = "Томск")
         {
-            return null;
+            return (Point)_context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%")).Take(1);
         }
 
-        [HttpGet("points")]
-        public List<Point> searchForPoints()
+        [HttpGet("/name/{name}")]
+        public IEnumerable<Point> searchForPoints(string name)
         {
-            return null;
+            return _context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%"));
         }
         [HttpPost("/")]
-        public void AddTransporting(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
+        public void AddPoint(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
         {
 
         }
 
         [HttpGet("/{id}")]
-        public void AddTransporting(int id)
+        public Point GetPoint(int id)
         {
-
+            return _context.Points.Find(id);
         }
 
         [HttpPatch("/{id}")]
@@ -43,7 +52,12 @@ namespace TravelBooking.Controllers
         [HttpDelete("/{id}")]
         public void RemoveTransporting(int id)
         {
+            Point point = new Point() { Id = id, Name = "", Region = "", City = "" };
 
+            _context.Points.Attach(point);
+            _context.Points.Remove(point);
+
+            _context.SaveChanges();
         }
     }
 }
