@@ -18,7 +18,7 @@ namespace TravelBooking.Controllers
             _context = context;
         }
 
-        [HttpPost("/")]
+        [HttpPost("")]
         public IResult AddTransporting(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
         {
             _context.Transportations.Add(new Transportation

@@ -25,7 +25,7 @@ namespace TravelBooking.Controllers
 
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public void RemoveTransporting(int id)
         {
 

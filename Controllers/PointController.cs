@@ -20,18 +20,18 @@ namespace TravelBooking.Controllers
         }
 
 
-        [HttpGet("point")]
+        [HttpGet("name/{name}")]
         public Point searchForPoint(string name = "Томск")
         {
             return (Point)_context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%")).Take(1);
         }
 
-        [HttpGet("name/{name}")]
+        [HttpGet("search/{name}")]
         public IEnumerable<Point> searchForPoints(string name)
         {
             return _context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%"));
         }
-        [HttpPost("/")]
+        [HttpPost("")]
         public void AddPoint(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
         {
 

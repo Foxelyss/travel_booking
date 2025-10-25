@@ -110,7 +110,7 @@ public class AuthController : Controller
     }
 
     [HttpGet("api/auth/about")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public IResult AboutUser()
     {
         return Results.Ok(HttpContext.User.HasClaim(ClaimTypes.Role, "regular"));
