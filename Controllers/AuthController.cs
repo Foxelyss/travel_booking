@@ -56,7 +56,7 @@ public class AuthController : Controller
     }
 
     [HttpPost("login")]
-    public async Task Authorize(string? returnUrl)
+    public async Task<IResult> Authorize(string? returnUrl)
     {
         // получаем из формы email и пароль
         var form = HttpContext.Request.Form;
@@ -78,12 +78,12 @@ public class AuthController : Controller
         // создаем объект ClaimsIdentity
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
         // установка аутентификационных куки
-        var prop = new AuthenticationProperties()
-        {
-            RedirectUri = "/Index"
-        };
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), prop);
-        // return Results.Redirect(returnUrl ?? "/");
+        // var prop = new AuthenticationProperties()
+        // {
+        //     RedirectUri = "/Index"
+        // };
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+        return Results.Redirect(returnUrl ?? "/");
         // await HttpContext.SignInAsync("oidc", );
     }
 
@@ -118,7 +118,7 @@ public class AuthController : Controller
 
     [HttpGet("logout")]
     [Authorize]
-    public async Task Logout(string? returnUrl)
+    public async Task<IResult> Logout(string? returnUrl)
     {
         Console.WriteLine("asdfa!@!");
         var prop = new AuthenticationProperties()
@@ -126,7 +126,10 @@ public class AuthController : Controller
             RedirectUri = "index.html"
         };
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        await HttpContext.SignOutAsync("oidc", prop);
+        // await HttpContext.SignOutAsync("oidc", prop);
+
+        return Results.Redirect(returnUrl ?? "/");
+
     }
 }
 

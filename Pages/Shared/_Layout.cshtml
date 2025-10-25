@@ -14,6 +14,7 @@
 
 <body>
     <header>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">AspNetCoreDemo</a>
@@ -30,17 +31,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Политика
                                 конфиденциальности</a>
                         </li>
-                        @if (!User.IsInRole("regular"))
-{
-  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Login">Вход/Регистрация</a>
-                        </li>
-}else{
-<li class="nav-item">@(User.IsInRole("regular"))
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Профиль</a>
-                        </li>
-}
-                        
+
                     </ul>
                 </div>
             </div>
@@ -51,13 +42,25 @@
             @RenderBody()
         </main>
     </div>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-body-secondary">© 2025 Company, Inc</p> <a href="/"
+                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+                aria-label="Foxelyss"> <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+                    <use xlink:href="https://blog.foxelyss.ru/assets/img/logo.png"></use>
+                </svg> </a>
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a asp-page="/Privacy" class="nav-link px-2 text-body-secondary">Политика
+                        конфиденциальности</a></li>
+                <li class="nav-item"><a href="/About" class="nav-link px-2 text-body-secondary">О компании</a></li>
+                <li class="nav-item"><a href="mailto:travel_booking@foxelyss.ru"
+                        class="nav-link px-2 text-body-secondary">Написать нам на почту!</a></li>
+                <li class="nav-item"><a href="https://blog.foxelyss.ru/ru/pages/about"
+                        class="nav-link px-2 text-body-secondary">About</a></li>
+            </ul>
+        </footer>
+    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-        @(User)
-            &copy; 2025 - AspNetCoreDemo - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
