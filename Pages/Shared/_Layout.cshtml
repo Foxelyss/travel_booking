@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AspNetCoreDemo</title>
+    <title>@ViewData["Title"] - Агрегатор</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -32,29 +32,31 @@
         <header class="p-3 bg-dark text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <a asp-page="/Index" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                         <img class="bi me-2" width="42" height="42" role="img" aria-label="Logo" src="~/favicon.ico"
                             alt="Logo">
                         </img>
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a asp-page="/" class="nav-link px-2 text-secondary">Домашняя страница</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                        <li><a asp-page="/Index" class="nav-link px-2 text-white">Домашняя страница</a></li>
+                        <li><a asp-page="/Search" class="nav-link px-2 text-white">Поиск</a></li>
+                        <li><a asp-page="/About" class="nav-link px-2 text-white">Об агрегаторе</a></li>
                     </ul>
+                    @if (!User.IsInRole("regular"))
+                    {
+                        <div class="text-end">
+                            <a type="button" class="btn btn-outline-light me-2" asp-page="/Login">Вход</a>
+                            <a type="button" class="btn btn-warning" asp-page="/Register">Регистрация</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-end">
+                            <a type="button" class="btn btn-warning" asp-page="/Profile">Профиль</a>
+                        </div>
+                    }
 
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <input type="search" class="form-control form-control-dark" placeholder="Search..."
-                            aria-label="Search">
-                    </form>
-
-                    <div class="text-end">
-                        <a type="button" class="btn btn-outline-light me-2" asp-page="/Login">Вход</a>
-                        <a type="button" class="btn btn-warning" asp-page="/Register">Регистрация</a>
-                    </div>
                 </div>
             </div>
         </header>
@@ -64,8 +66,8 @@
             @RenderBody()
         </main>
     </div>
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <footer class=" border-top">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
             <p class="col-md-4 mb-0 text-body-secondary">Foxelyss © 2025</p> <a href="/"
                 class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
                 aria-label="Foxelyss"> <img class="" width="42" height="42" aria-hidden="true" alt="Logo"
@@ -80,8 +82,8 @@
                 <li class="nav-item"><a href="https://blog.foxelyss.ru/ru/pages/about"
                         class="nav-link px-2 text-body-secondary">Об авторе</a></li>
             </ul>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

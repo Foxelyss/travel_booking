@@ -9,7 +9,7 @@
             <center>
                 <h1>Пожалуйста, войдите для доступа</h1>
             </center>
-            <form action="/login" method="POST">
+            <form action="/register" method="POST">
                 <div class="mb-3 form-floating">
                     <input type="text" class="form-control" placeholder="Логин" id="username" name="username" required>
                     <label for="username" class="form-label">Логин</label>
@@ -18,6 +18,10 @@
                     <input type="email" class="form-control" placeholder="Электронная почта" id="email" name="email"
                         required>
                     <label for="email" class="form-label">Электронная почта</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="phone" class="form-control" placeholder="Телефон" id="phone" name="phone" required>
+                    <label for="phone" class="form-label">Номер телефона</label>
                 </div>
                 <div class="mb-3 form-floating">
                     <input type="password" id="password" class="form-control" name="password" placeholder="Пароль"

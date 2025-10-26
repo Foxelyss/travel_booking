@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TravelBooking.Data;
+using TravelBooking.Models;
 
 namespace TravelBooking.Controllers
 {
@@ -7,16 +9,29 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class MeanController : ControllerBase
     {
-        [HttpPost("")]
-        public void AddMean(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
-        {
 
+        private readonly StoreContext _context;
+
+        public MeanController(StoreContext context)
+        {
+            _context = context;
+        }
+        [HttpPost("")]
+        public void AddMean(string name)
+        {
+            _context.TransportingMeans.Add(new TransportingMean { Name = name });
+            _context.SaveChanges();
         }
 
         [HttpGet("{id}")]
-        public void GetMean(int id)
+        public IResult GetMean(int id)
         {
-
+            var mean = _context.TransportingMeans.FirstOrDefault(b => b.Id == id);
+            if (mean == null)
+            {
+                return Results.NotFound();
+            }
+            return Results.Ok(mean);
         }
 
         [HttpPatch("{id}")]
@@ -26,9 +41,19 @@ namespace TravelBooking.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void RemoveMean(int id)
+        public IResult RemoveMean(int id)
         {
+            var mean = _context.TransportingMeans.FirstOrDefault(b => b.Id == id);
 
+            if (mean == null)
+            {
+                return Results.NotFound();
+            }
+
+            _context.TransportingMeans.Remove(mean);
+            _context.SaveChanges();
+
+            return Results.NoContent();
         }
     }
 }

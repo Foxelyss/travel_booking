@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace TravelBooking.DTO;
 
 public record class AccountRegistration(
-     [Required] long phone,
+     [Required, Phone] string phone,
     [MaxLength(128), Required, EmailAddress] string email,
     [MaxLength(255), Required] string password,
     [MaxLength(256)] string? username)

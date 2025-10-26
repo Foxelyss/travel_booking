@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
@@ -16,10 +19,30 @@ namespace TravelBooking.Controllers;
 public class AuthController : Controller
 {
     private readonly StoreContext _context;
+    private readonly PasswordHasher<string> _hasher = new PasswordHasher<string>();
 
     public AuthController(StoreContext context)
     {
         _context = context;
+    }
+
+    public string HashPassword(string password)
+    {
+        // Generate a 128-bit salt using a sequence of
+        // cryptographically strong random bytes.
+        byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
+        Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
+
+        // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
+        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password!,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
+        Console.WriteLine($"Hashed: {hashed}");
+        return hashed;
     }
 
     [HttpGet]
@@ -62,11 +85,23 @@ public class AuthController : Controller
         var form = HttpContext.Request.Form;
         // если email и/или пароль не установлены, посылаем статусный код ошибки 400
         if (!form.ContainsKey("username") || !form.ContainsKey("password"))
-            // return Results.BadRequest("Email и/или пароль не установлены");
-            ;
+            return Results.BadRequest("Email и/или пароль не установлены");
 
         string email = form["username"];
         string password = form["password"];
+
+        var account = _context.Accounts.Where(p => p.Email == email).FirstOrDefault();
+
+        if (account == null)
+        {
+            return Results.Unauthorized();
+        }
+        if (_hasher.VerifyHashedPassword("", account.PasswordHash, password) == PasswordVerificationResult.Failed)
+        {
+            return Results.Unauthorized();
+        }
+        // Console.WriteLine();
+        // Console.WriteLine(HashPassword(password));
 
         // находим пользователя 
         // Person? person = people.FirstOrDefault(p => p.Email == email && p.Password == password);
@@ -78,28 +113,55 @@ public class AuthController : Controller
         // создаем объект ClaimsIdentity
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
         // установка аутентификационных куки
-        // var prop = new AuthenticationProperties()
-        // {
-        //     RedirectUri = "/Index"
-        // };
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
         return Results.Redirect(returnUrl ?? "/");
-        // await HttpContext.SignInAsync("oidc", );
     }
 
     [HttpPost("register")]
-    [Consumes("application/json")]
-    public IResult Register([FromBody] AccountRegistration accountRegistration)
+    [Consumes("application/x-www-form-urlencoded")]
+    public IResult Register([FromForm] AccountRegistration accountRegistration)
     {
         if (!ModelState.IsValid)
         {
             return Results.BadRequest(ModelState);
         }
 
+        if (accountRegistration.password.IndexOf(' ') != -1)
+        {
+            return Results.BadRequest("Пароль имеет пробелы");
+        }
+
         var account = new Account
         {
             Email = accountRegistration.email,
-            PasswordHash = accountRegistration.password,
+            PasswordHash = _hasher.HashPassword("", accountRegistration.password),
+            Phone = accountRegistration.phone,
+            Username = accountRegistration.username ?? accountRegistration.email
+        };
+        _context.Accounts.Add(account);
+
+        _context.SaveChanges();
+        return Results.Ok(account);
+    }
+
+    [HttpPost("api/auth/register")]
+    [Consumes("application/json")]
+    public IResult RegisterFromAPI([FromBody] AccountRegistration accountRegistration)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Results.BadRequest(ModelState);
+        }
+
+        if (accountRegistration.password.IndexOf(' ') != -1)
+        {
+            return Results.BadRequest("Пароль имеет пробелы");
+        }
+
+        var account = new Account
+        {
+            Email = accountRegistration.email,
+            PasswordHash = _hasher.HashPassword("", accountRegistration.password),
             Phone = accountRegistration.phone,
             Username = accountRegistration.username ?? accountRegistration.email
         };
@@ -126,10 +188,8 @@ public class AuthController : Controller
             RedirectUri = "index.html"
         };
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        // await HttpContext.SignOutAsync("oidc", prop);
 
         return Results.Redirect(returnUrl ?? "/");
-
     }
 }
 

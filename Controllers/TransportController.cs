@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Data;
 using TravelBooking.Models;
+using TravelBooking.DTO;
 
 namespace TravelBooking.Controllers
 {
@@ -18,14 +19,29 @@ namespace TravelBooking.Controllers
             _context = context;
         }
 
-        [HttpPost("")]
-        public IResult AddTransporting(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
+        [HttpPost]
+        [Consumes("application/json")]
+        public IResult AddTransporting([FromBody] TransportingRegistration registration)
         {
-            _context.Transportations.Add(new Transportation
+            if (!ModelState.IsValid)
             {
-                Name = name,
-            });
+                return Results.BadRequest(ModelState);
+            }
 
+            var obj = _context.Transportations.Add(new Transportation
+            {
+                Name = registration.Name,
+                Departure = registration.Departure,
+                Arrival = registration.Arrival,
+                DeparturePointId = registration.DeparturePoint,
+                ArrivalPointId = registration.ArrivalPoint,
+                CompanyId = registration.Company,
+                Price = registration.Price,
+                PlaceCount = registration.PlaceCount,
+                FreePlaceCount = registration.PlaceCount
+            });
+            _context.SaveChanges();
+            // _context.TransportationMeans.AddRange(registration.transportingMean.Select(id => new TransportingMeans { Transport = obj.Entity.Id, Mean = id }));
             _context.SaveChanges();
 
             return Results.Ok();

@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TravelBooking.Data;
+using TravelBooking.Models;
+using TravelBooking.DTO;
 
 namespace TravelBooking.Controllers
 {
@@ -7,16 +10,39 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        [HttpPost("")]
-        public void AddCompany(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
-        {
 
+        private readonly StoreContext _context;
+
+        public CompanyController(StoreContext context)
+        {
+            _context = context;
+        }
+        [HttpPost("")]
+        [Consumes("application/json")]
+        public IResult AddCompany(CompanyRegistration companyRegistration)
+        {
+            _context.Companies.Add(new Company
+            {
+                Name = companyRegistration.name,
+                RegistrationAddress = companyRegistration.address,
+                Phone = companyRegistration.phone,
+                Inn = companyRegistration.INN
+            });
+            _context.SaveChanges();
+            return Results.Ok();
         }
 
         [HttpGet("{id}")]
-        public void GetCompany(int id)
+        public IResult GetCompany(int id)
         {
+            var company = _context.Companies.SingleOrDefault(c => c.Id == id);
 
+            if (company == null)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.Ok(company);
         }
 
         [HttpPatch("{id}")]
@@ -26,9 +52,18 @@ namespace TravelBooking.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void RemoveCompany(int id)
+        public IResult RemoveCompany(int id)
         {
+            var _company = _context.Companies.SingleOrDefault(c => c.Id == id);
 
+            if (_company == null)
+            {
+                return Results.NotFound();
+            }
+
+            _context.Companies.Remove(_company);
+            _context.SaveChanges();
+            return Results.NoContent();
         }
     }
 }

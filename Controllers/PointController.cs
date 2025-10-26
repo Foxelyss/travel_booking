@@ -38,9 +38,13 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("{id}")]
-        public Point GetPoint(int id)
+        public IResult GetPoint(int id)
         {
-            return _context.Points.Find(id);
+            var point = _context.Points.FirstOrDefault(b => b.Id == id);
+
+            if (point == null) { return Results.NotFound(); }
+
+            return Results.Ok(point);
         }
 
         [HttpPatch("{id}")]

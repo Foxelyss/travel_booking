@@ -50,10 +50,6 @@ name: "auth",
 pattern: "{controller=Auth}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "administration",
-    pattern: "{controller=Administration}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
 name: "book",
 pattern: "{controller=Book}/{action=Index}/{id?}");
 

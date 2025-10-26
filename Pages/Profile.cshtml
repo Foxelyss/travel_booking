@@ -1,10 +1,17 @@
 ﻿@page
+@using System.Security.Claims
 @model TravelBooking.Pages.ProfileModel
 @{
 }
 
+<div class="container-sm d-flex flex-column gap-5">
+    <center>
+        <h1> Приветствуем, <em>@(User.FindFirstValue(ClaimTypes.Name))</em>!</h1>
+    </center>
 
-Приветствуем!
+    <div class="container-sm d-flex flex-column gap-5" style="max-width: 500px;"> <a type="button"
+            class="btn btn-outline-light me-2" asp-page="/Checks">Чеки</a>
+        <a type="button" class="btn btn-warning" href="/logout">Выход</a>
+    </div>
 
-<button>Чеки/Отмена</button>
-<a href="/Logout">asd</a>
+</div>

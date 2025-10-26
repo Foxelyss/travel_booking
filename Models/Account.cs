@@ -6,10 +6,10 @@ namespace TravelBooking.Models;
 public class Account
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    [Required]
-    public long Phone { get; set; }
+    [Required, Phone]
+    public required string Phone { get; set; }
 
     [Required]
     [MaxLength(128)]

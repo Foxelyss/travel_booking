@@ -24,6 +24,7 @@ public class Transportation
     [Required]
     public int ArrivalPointId { get; set; }
 
+    [Required]
     public int CompanyId { get; set; }
 
     [Required]
@@ -38,4 +39,6 @@ public class Transportation
     public virtual Point? DeparturePoint { get; set; }
     public virtual Point? ArrivalPoint { get; set; }
     public virtual Company? Company { get; set; }
+
+    // public IEnumerable<TransportingMean>? TransportingMeans { get; set; }
 }
