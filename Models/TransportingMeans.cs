@@ -9,10 +9,10 @@ public class TransportingMeans
     [Key]
     public int Id { get; set; }
 
-    public int Mean { get; set; }
+    public int TransportingMeanId { get; set; }
 
-    public int Transport { get; set; }
+    public int TransportationId { get; set; }
 
     public virtual TransportingMean? TransportingMean { get; set; }
-    public virtual Transportation? Transportation { get; set; }
+    public virtual Transport? Transportation { get; set; }
 }

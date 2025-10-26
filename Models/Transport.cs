@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.Models;
 
-public class Transportation
+public class Transport
 {
     [Key]
     public int Id { get; set; }
@@ -40,5 +40,5 @@ public class Transportation
     public virtual Point? ArrivalPoint { get; set; }
     public virtual Company? Company { get; set; }
 
-    // public IEnumerable<TransportingMean>? TransportingMeans { get; set; }
+    public IEnumerable<TransportingMean>? TransportingMeans { get; set; }
 }

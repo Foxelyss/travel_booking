@@ -44,7 +44,7 @@ namespace TravelBooking.Controllers
         [HttpPost("book")]
         public async Task<IResult> Book(int transporting, String name, String surname, String middle_name, String email, long passport, long phone)
         {
-            var transportingObj = _context.Transportations.SingleOrDefault(b => b.Id == transporting);
+            var transportingObj = _context.Transports.Find(transporting);
 
             if (transportingObj == null)
             {
@@ -67,10 +67,32 @@ namespace TravelBooking.Controllers
 
         [Authorize]
         [HttpPost("return")]
-        public String ReturnTicket(long id)
+        public async Task<IResult> ReturnTicket(long id)
         {
+            var booking = _context.Books.Find(id);
 
-            return "Success";
+            var transportingObj = _context.Transports.Find(id);
+
+            if (transportingObj == null)
+            {
+                return Results.NotFound();
+            }
+
+            if (transportingObj.FreePlaceCount <= transportingObj.PlaceCount)
+            {
+                transportingObj.FreePlaceCount++;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return Results.Conflict();
+            }
+
+
+
+
+            return Results.Ok();
         }
     }
 }
+

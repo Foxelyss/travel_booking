@@ -29,13 +29,11 @@ namespace TravelBooking.Controllers
         [HttpGet("search")]
         public IEnumerable<object> searchForTransport(int point_a, int point_b, long wanted_time, int mean, int page)
         {
-            return (from t in _context.Transportations
-                    join p in _context.Points on t.DeparturePointId equals p.Id
-                    join p2 in _context.Points on t.ArrivalPointId equals p2.Id
-                    join tm in _context.TransportationMeans on t.Id equals tm.Transport
-                    join tm2 in _context.TransportingMeans on tm.Mean equals tm2.Id
-                    where t.DeparturePointId == point_a && t.ArrivalPointId == point_b && t.Arrival == DateTime.MinValue
-                    select new { t, p, p2, tm, tm2 })
+            return _context.Transports
+            .Include(point_a => point_a.DeparturePoint)
+            .Include(point_b => point_b.ArrivalPoint)
+            .Include(means => means.TransportingMeans)
+            .Where(t => t.DeparturePointId == point_a && t.ArrivalPointId == point_b && t.TransportingMeans.Any(m => m.Id == mean))
             .Skip(page * 10)
             .Take(10);
         }

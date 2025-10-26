@@ -10,8 +10,6 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class TransportController : ControllerBase
     {
-
-
         private readonly StoreContext _context;
 
         public TransportController(StoreContext context)
@@ -28,20 +26,21 @@ namespace TravelBooking.Controllers
                 return Results.BadRequest(ModelState);
             }
 
-            var obj = _context.Transportations.Add(new Transportation
+            var obj = _context.Transports.Add(new Transport
             {
                 Name = registration.Name,
-                Departure = registration.Departure,
-                Arrival = registration.Arrival,
-                DeparturePointId = registration.DeparturePoint,
-                ArrivalPointId = registration.ArrivalPoint,
-                CompanyId = registration.Company,
-                Price = registration.Price,
-                PlaceCount = registration.PlaceCount,
-                FreePlaceCount = registration.PlaceCount
+                Departure = registration.Departure.GetValueOrDefault(),
+                Arrival = registration.Arrival.GetValueOrDefault(),
+                DeparturePointId = registration.DeparturePoint.GetValueOrDefault(),
+                ArrivalPointId = registration.ArrivalPoint.GetValueOrDefault(),
+                CompanyId = registration.Company.GetValueOrDefault(),
+                Price = registration.Price.GetValueOrDefault(),
+                PlaceCount = registration.PlaceCount.GetValueOrDefault(),
+                FreePlaceCount = registration.PlaceCount.GetValueOrDefault()
             });
             _context.SaveChanges();
-            // _context.TransportationMeans.AddRange(registration.transportingMean.Select(id => new TransportingMeans { Transport = obj.Entity.Id, Mean = id }));
+
+            _context.TransportingMeans.AddRange(registration.TransportingMean.Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
             _context.SaveChanges();
 
             return Results.Ok();
@@ -50,7 +49,7 @@ namespace TravelBooking.Controllers
         [HttpGet("{id}")]
         public IResult GetTransporting(int id)
         {
-            var transporting = _context.Transportations.Find(id);
+            var transporting = _context.Transports.Find(id);
 
             if (transporting == null)
             {
@@ -69,10 +68,10 @@ namespace TravelBooking.Controllers
         [HttpDelete("{id}")]
         public void RemoveTransporting(int id)
         {
-            Transportation point = new Transportation() { Id = id, Name = "" };
+            Transport point = new Transport() { Id = id, Name = "" };
 
-            _context.Transportations.Attach(point);
-            _context.Transportations.Remove(point);
+            _context.Transports.Attach(point);
+            _context.Transports.Remove(point);
 
             _context.SaveChanges();
         }

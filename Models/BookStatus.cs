@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.Models;
 
-public class Status
+public class BookStatus
 {
     [Key]
     public int Id { get; set; }

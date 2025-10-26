@@ -19,14 +19,14 @@ namespace TravelBooking.Controllers
         [HttpPost("")]
         public void AddMean(string name)
         {
-            _context.TransportingMeans.Add(new TransportingMean { Name = name });
+            _context.TransportMeans.Add(new TransportingMean { Name = name });
             _context.SaveChanges();
         }
 
         [HttpGet("{id}")]
         public IResult GetMean(int id)
         {
-            var mean = _context.TransportingMeans.FirstOrDefault(b => b.Id == id);
+            var mean = _context.TransportMeans.FirstOrDefault(b => b.Id == id);
             if (mean == null)
             {
                 return Results.NotFound();
@@ -43,14 +43,14 @@ namespace TravelBooking.Controllers
         [HttpDelete("{id}")]
         public IResult RemoveMean(int id)
         {
-            var mean = _context.TransportingMeans.FirstOrDefault(b => b.Id == id);
+            var mean = _context.TransportMeans.FirstOrDefault(b => b.Id == id);
 
             if (mean == null)
             {
                 return Results.NotFound();
             }
 
-            _context.TransportingMeans.Remove(mean);
+            _context.TransportMeans.Remove(mean);
             _context.SaveChanges();
 
             return Results.NoContent();

@@ -7,10 +7,10 @@ namespace TravelBooking.Data;
 public class StoreContext(DbContextOptions<StoreContext> options) : DbContext(options)
 {
     public DbSet<Company> Companies { get; set; }
-    public DbSet<TransportingMean> TransportingMeans { get; set; }
-    public DbSet<TransportingMeans> TransportationMeans { get; set; }
+    public DbSet<TransportingMean> TransportMeans { get; set; }
+    public DbSet<TransportingMeans> TransportingMeans { get; set; }
     public DbSet<Point> Points { get; set; }
-    public DbSet<Transportation> Transportations { get; set; }
+    public DbSet<Transport> Transports { get; set; }
     public DbSet<Passenger> Passengers { get; set; }
     public DbSet<Book> Books { get; set; }
     public DbSet<Account> Accounts { get; set; }
@@ -20,24 +20,29 @@ public class StoreContext(DbContextOptions<StoreContext> options) : DbContext(op
         modelBuilder.Entity<TransportingMeans>()
             .HasOne(tm => tm.TransportingMean)
             .WithMany()
-            .HasForeignKey(tm => tm.Mean);
+            .HasForeignKey(tm => tm.TransportingMeanId);
 
         modelBuilder.Entity<TransportingMeans>()
             .HasOne(tm => tm.Transportation)
             .WithMany()
-            .HasForeignKey(tm => tm.Transport);
+            .HasForeignKey(tm => tm.TransportationId);
 
-        modelBuilder.Entity<Transportation>()
+        modelBuilder.Entity<Transport>()
             .HasOne(t => t.DeparturePoint)
             .WithMany()
             .HasForeignKey(t => t.DeparturePointId);
 
-        modelBuilder.Entity<Transportation>()
+        modelBuilder.Entity<Transport>()
             .HasOne(t => t.ArrivalPoint)
             .WithMany()
             .HasForeignKey(t => t.ArrivalPointId);
 
-        modelBuilder.Entity<Transportation>()
+        modelBuilder.Entity<Transport>()
+               .HasMany(t => t.TransportingMeans)
+               .WithMany(mean => mean.Transportations)
+               .UsingEntity<TransportingMeans>();
+
+        modelBuilder.Entity<Transport>()
             .HasOne(t => t.Company)
             .WithMany()
             .HasForeignKey(t => t.CompanyId);

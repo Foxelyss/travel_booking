@@ -32,9 +32,10 @@ namespace TravelBooking.Controllers
             return _context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%"));
         }
         [HttpPost("")]
-        public void AddPoint(String name, DateTime departure, DateTime arrival, int departure_point, int arrival_point, int transporting_mean, int company, float price, int place_count)
+        public void AddPoint(string name, string region, string city)
         {
-
+            _context.Points.Add(new Point { Name = name, Region = region, City = city });
+            _context.SaveChanges();
         }
 
         [HttpGet("{id}")]

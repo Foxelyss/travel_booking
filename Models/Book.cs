@@ -20,8 +20,8 @@ public class Book
     public int TransportationId { get; set; }
 
     public virtual Passenger? Passenger { get; set; }
-    public virtual Transportation? Transportation { get; set; }
+    public virtual Transport? Transportation { get; set; }
 
     public int StatusId;
-    public virtual Status? Status { get; set; }
+    public virtual BookStatus? Status { get; set; }
 }
