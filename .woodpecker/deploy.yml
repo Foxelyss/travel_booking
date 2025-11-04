@@ -1,0 +1,36 @@
+when:
+  - event: manual
+    branch: main
+
+steps:
+  - name: Copy source files
+    image: appleboy/drone-scp
+    settings:
+      host:         
+        from_secret: secret_host
+      username:
+        from_secret: secret_username
+      key: 
+        from_secret: secret_key
+      known_hosts:  
+        from_secret: known_hosts
+      port: 22
+      target: ~/travel-booking
+      source:
+        - src
+  - name: Deploy docker compose stack
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: secret_host
+      username:
+        from_secret: secret_username
+      key: 
+        from_secret: secret_key
+      known_hosts:  
+        from_secret: known_hosts
+      port: 22
+      script:
+        - cd travel-booking  
+        - docker compose build
+        - docker compose up -d
