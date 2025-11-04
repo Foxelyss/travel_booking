@@ -96,23 +96,20 @@ public class AuthController : Controller
         {
             return Results.Unauthorized();
         }
-        if (_hasher.VerifyHashedPassword("", account.PasswordHash, password) == PasswordVerificationResult.Failed)
-        {
-            return Results.Unauthorized();
-        }
-        // Console.WriteLine();
-        // Console.WriteLine(HashPassword(password));
 
-        // находим пользователя 
-        // Person? person = people.FirstOrDefault(p => p.Email == email && p.Password == password);
-        // если пользователь не найден, отправляем статусный код 401
-        // if (person is null) return Results.Unauthorized();
+        var authStatus = _hasher.VerifyHashedPassword("", account.PasswordHash, password);
+        switch (authStatus)
+        {
+            case PasswordVerificationResult.Failed:
+                return Results.Unauthorized();
+            case PasswordVerificationResult.SuccessRehashNeeded:
+                break;
+        }
 
         var claims = new List<Claim> { new Claim(ClaimTypes.Name, email), new Claim(ClaimTypes.Role, "regular") };
 
-        // создаем объект ClaimsIdentity
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-        // установка аутентификационных куки
+
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
         return Results.Redirect(returnUrl ?? "/");
     }
