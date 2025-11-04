@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("StoreContext");
-builder.Services.AddSqlite<StoreContext>(connectionString);
+builder.Services.AddNpgsql<StoreContext>(connectionString);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();

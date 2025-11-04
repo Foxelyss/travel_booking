@@ -26,6 +26,24 @@ namespace TravelBooking.Controllers
                 return Results.BadRequest(ModelState);
             }
 
+            foreach (int a in registration.TransportingMean)
+            {
+                if (_context.TransportMeans.Find(a) == null)
+                {
+                    return Results.NotFound($"Transport id #{a} not found");
+                }
+            }
+
+            if (_context.Transports.Find(registration.ArrivalPoint.GetValueOrDefault()) == null)
+            {
+                return Results.NotFound($"ArrivalPoint id #{registration.ArrivalPoint} not found");
+            }
+
+            if (_context.Transports.Find(registration.DeparturePoint.GetValueOrDefault()) == null)
+            {
+                return Results.NotFound($"DeparturePoint id #{registration.DeparturePoint} not found");
+            }
+
             var obj = _context.Transports.Add(new Transport
             {
                 Name = registration.Name,
@@ -60,9 +78,9 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public void EditTransporting(int id)
+        public IResult EditTransporting(int id)
         {
-
+            return Results.Ok();
         }
 
         [HttpDelete("{id}")]

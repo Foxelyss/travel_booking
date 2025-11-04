@@ -34,6 +34,7 @@ namespace TravelBooking.Controllers
             .Include(point_b => point_b.ArrivalPoint)
             .Include(means => means.TransportingMeans)
             .Where(t => t.DeparturePointId == point_a && t.ArrivalPointId == point_b && t.TransportingMeans.Any(m => m.Id == mean))
+            .OrderBy(x => MathF.Abs(x.Departure.ToFileTime() - wanted_time))
             .Skip(page * 10)
             .Take(10);
         }

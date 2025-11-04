@@ -21,10 +21,6 @@ public class Passenger
 
     [MaxLength(32)]
     public required string Lastname { get; set; }
-
-    public Guid AccountId { get; set; }
-
-    public virtual Account? Account { get; set; }
 }
 
 

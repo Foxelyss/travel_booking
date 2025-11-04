@@ -17,6 +17,7 @@ namespace TravelBooking.Controllers
         {
             _context = context;
         }
+
         [HttpPost("")]
         [Consumes("application/json")]
         public IResult AddCompany(CompanyRegistration companyRegistration)
@@ -28,7 +29,9 @@ namespace TravelBooking.Controllers
                 Phone = companyRegistration.phone,
                 Inn = companyRegistration.INN
             });
+
             _context.SaveChanges();
+
             return Results.Ok();
         }
 
@@ -46,9 +49,18 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public void EditCompany(int id)
+        public IResult EditCompany(int id)
         {
+            var company = _context.Companies.SingleOrDefault(c => c.Id == id);
 
+            // company = new Company
+            // {
+            // }
+            // ;
+
+            _context.SaveChanges();
+
+            return Results.Ok();
         }
 
         [HttpDelete("{id}")]

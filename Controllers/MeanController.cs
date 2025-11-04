@@ -34,10 +34,23 @@ namespace TravelBooking.Controllers
             return Results.Ok(mean);
         }
 
-        [HttpPatch("{id}")]
-        public void EditMean(int id)
+        [HttpGet("all")]
+        public IResult GetAllMeans()
         {
+            var mean = _context.TransportMeans.Take(100);
 
+            if (mean == null)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.Ok(mean);
+        }
+
+        [HttpPatch("{id}")]
+        public IResult EditMean(int id)
+        {
+            return Results.Ok();
         }
 
         [HttpDelete("{id}")]

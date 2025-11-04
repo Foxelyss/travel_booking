@@ -29,8 +29,9 @@ namespace TravelBooking.Controllers
         [HttpGet("search/{name}")]
         public IEnumerable<Point> searchForPoints(string name)
         {
-            return _context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%"));
+            return _context.Points.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{name}%".ToLower()));
         }
+
         [HttpPost("")]
         public void AddPoint(string name, string region, string city)
         {

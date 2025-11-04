@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TravelBooking.Data;
 using TravelBooking.DTO;
 using TravelBooking.Models;
@@ -35,8 +36,8 @@ namespace TravelBooking.Controllers
             string email = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
             return _context.Books.Join(_context.Passengers, book => book.PassengerId, passenger => passenger.Id, (book, passenger) => new { book, passenger })
-                .Join(_context.Accounts, x => x.passenger.AccountId, account => account.Id, (x, account) => new { x.book, x.passenger, account })
-                .Where(x => x.account.Email == email)
+                .Include(x => x.book.Account)
+                .Where(x => x.book.Account.Email == email)
                 .Select(x => x.book);
         }
 
@@ -73,7 +74,7 @@ namespace TravelBooking.Controllers
 
             var transportingObj = _context.Transports.Find(id);
 
-            if (transportingObj == null)
+            if (transportingObj == null || booking == null)
             {
                 return Results.NotFound();
             }
@@ -88,8 +89,8 @@ namespace TravelBooking.Controllers
                 return Results.Conflict();
             }
 
-
-
+            booking.StatusId = 1;
+            await _context.SaveChangesAsync();
 
             return Results.Ok();
         }

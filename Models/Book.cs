@@ -24,4 +24,9 @@ public class Book
 
     public int StatusId;
     public virtual BookStatus? Status { get; set; }
+
+    public Guid AccountId { get; set; }
+    public virtual Account? Account { get; set; }
+
+    [Required] public DateTime BookingDate { get; set; } = DateTime.Now;
 }
