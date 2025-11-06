@@ -1,0 +1,26 @@
+meta {
+  name: add point
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/api/mean/?name=автобус
+  body: json
+  auth: inherit
+}
+
+params:query {
+  name: автобус
+}
+
+body:json {
+  {
+    "name": "asdfas"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,24 @@
+meta {
+  name: About
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/api/auth/about
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:multipart-form {
+  email: asd
+  password: 123
+}
+
+settings {
+  encodeUrl: true
+}

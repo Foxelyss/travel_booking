@@ -1,0 +1,24 @@
+meta {
+  name: Login copy
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{host}}/login
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  username: asd
+  password: 123
+}
+
+script:post-response {
+  bru.setVar("access_token", res.body.access_token)
+}
+
+settings {
+  encodeUrl: true
+}

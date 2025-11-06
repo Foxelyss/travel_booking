@@ -1,0 +1,19 @@
+meta {
+  name: get point
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/api/point/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 
+}
+
+settings {
+  encodeUrl: true
+}

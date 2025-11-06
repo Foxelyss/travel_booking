@@ -1,0 +1,22 @@
+meta {
+  name: add point
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/api/point?name=Волгоград&city=Волгоград&region=Волгоградская область
+  body: none
+  auth: inherit
+}
+
+params:query {
+  name: Волгоград
+  city: Волгоград
+  region: Волгоградская область
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
