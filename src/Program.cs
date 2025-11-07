@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NSwag.AspNetCore;
 using TravelBooking;
 using TravelBooking.Data;
 
@@ -14,8 +15,10 @@ builder.Services.AddNpgsql<StoreContext>(connectionString);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
-builder.Services.AddOpenApiDocument();
-
+builder.Services.AddOpenApiDocument(document =>
+{
+    document.Title = "Агрегатор";
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -85,7 +88,7 @@ if (!app.Environment.IsDevelopment())
 else
 {
     app.UseOpenApi();
-    app.UseSwaggerUi();
+    app.UseSwaggerUi((x) => { x.DocumentTitle = "Агрегатор"; });
 }
 
 app.UseHttpsRedirection();

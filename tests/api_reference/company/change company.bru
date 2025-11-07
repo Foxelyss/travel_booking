@@ -1,10 +1,10 @@
 meta {
-  name: get point
+  name: change company
   type: http
-  seq: 4
+  seq: 3
 }
 
-get {
+patch {
   url: {{host}}/api/point/:id
   body: none
   auth: inherit
@@ -16,4 +16,5 @@ params:path {
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

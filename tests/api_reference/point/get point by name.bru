@@ -1,13 +1,17 @@
 meta {
-  name: add point
+  name: get point by name
   type: http
-  seq: 1
+  seq: 5
 }
 
-post {
-  url: {{host}}/api/point
+get {
+  url: {{host}}/api/point/name/:name
   body: json
   auth: inherit
+}
+
+params:path {
+  name: Свердловск
 }
 
 body:json {

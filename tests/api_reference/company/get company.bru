@@ -1,19 +1,20 @@
 meta {
-  name: remove company
+  name: get company
   type: http
   seq: 2
 }
 
-delete {
-  url: {{host}}/api/point/:id
+get {
+  url: {{host}}/api/company/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 
+  id: 1
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

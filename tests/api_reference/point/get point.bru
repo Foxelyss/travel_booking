@@ -1,13 +1,17 @@
 meta {
-  name: add point
+  name: get point
   type: http
-  seq: 1
+  seq: 2
 }
 
-post {
-  url: {{host}}/api/point
+get {
+  url: {{host}}/api/point/:id
   body: json
   auth: inherit
+}
+
+params:path {
+  id: 1
 }
 
 body:json {
