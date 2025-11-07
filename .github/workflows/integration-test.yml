@@ -83,7 +83,7 @@ jobs:
       - name: Run Bruno tests
         env:
           HOST: http://localhost:5165
-        run: npx bruno run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
+        run: bru run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
 
       - name: Upload Bruno test results
         uses: actions/upload-artifact@v4
