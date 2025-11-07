@@ -55,7 +55,7 @@ jobs:
         with:
           script: |
             # run some blocking stuff
-            dotnet run --project src/TravelBooking.csproj &
+            dotnet run --project src/TravelBooking.csproj
 
           readiness-script: |
             # check if whatever is it to run, is ready
