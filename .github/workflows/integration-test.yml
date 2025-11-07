@@ -49,6 +49,7 @@ jobs:
         run: dotnet ef database update --project src/TravelBooking.csproj --no-build
 
       - name: Start API server
+        if: always()
         env:
           ASPNETCORE_ENVIRONMENT: Development
           ASPNETCORE_URLS: http://+:5000
@@ -81,7 +82,7 @@ jobs:
       - name: Run Bruno tests
         env:
           HOST: http://localhost:5000
-        run: bruno run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
+        run: npx bruno run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
 
       - name: Upload Bruno test results
         uses: actions/upload-artifact@v4
