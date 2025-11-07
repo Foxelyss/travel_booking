@@ -1,0 +1,5 @@
+tests {
+  test("Response time is less than 250ms", () => {
+    expect(res.getResponseTime()).to.be.below(250);
+  });
+}

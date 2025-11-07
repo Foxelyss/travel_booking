@@ -26,6 +26,8 @@ jobs:
 
     env:
       ConnectionStrings__StoreContext: "Host=localhost;Port=5432;Database=testdb;Username=postgres;Password=password"
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://localhost:5165
 
     steps:
       - name: Checkout code
@@ -49,23 +51,23 @@ jobs:
         run: dotnet ef database update --project src/TravelBooking.csproj --no-build
 
       - name: Start API server
-        env:
-          ASPNETCORE_ENVIRONMENT: Development
-          ASPNETCORE_URLS: http://localhost:5000
-        run: dotnet run &
+        uses: miguelteixeiraa/action-run-in-background@v1
+        with:
+          script: |
+            # run some blocking stuff
+            dotnet run --project src/TravelBooking.csproj
 
-      - name: Wait for API to be ready
-        run: |
-          echo "Waiting for API to be available..."
-          for i in {1..30}; do
-            if curl -s http://localhost:5000/health > /dev/null; then
-              echo "API is up."
-              break
+          readiness-script: |
+            # check if whatever is it to run, is ready
+            if curl -sSf http://localhost:5165/ > /dev/null; then
+                echo "curl request was successful."
+            else
+                echo "curl request failed."
+                exit 1
             fi
-            echo "API not ready yet – waiting 2s..."
-            sleep 2
-          done
-          echo "API ready – proceeding to Bruno tests."
+
+          shell: bash
+          timeout: 30
 
       - name: Setup Node (required for Bruno)
         uses: actions/setup-node@v4
@@ -73,15 +75,15 @@ jobs:
           node-version: '25'
 
       - name: Install Bruno CLI
-        run: npm install -g @usebruno/bruno
-
+        run: npm install -g @usebruno/cli
+      
       - name: Create reports directory
         run: mkdir -p reports
       
       - name: Run Bruno tests
         env:
-          HOST: http://localhost:5000
-        run: bruno run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
+          HOST: http://localhost:5165
+        run: cd tests/integration && bru run --env-var host=$HOST --reporter-html ../../reports/results.html --reporter-junit ../../reports/results.xml
 
       - name: Upload Bruno test results
         uses: actions/upload-artifact@v4
