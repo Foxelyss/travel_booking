@@ -27,7 +27,7 @@ jobs:
     env:
       ConnectionStrings__StoreContext: "Host=localhost;Port=5432;Database=testdb;Username=postgres;Password=password"
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:5000
+      ASPNETCORE_URLS: http://localhost:5165
 
     steps:
       - name: Checkout code
@@ -59,7 +59,7 @@ jobs:
 
           readiness-script: |
             # check if whatever is it to run, is ready
-            if curl -sSf http://localhost:5000/ > /dev/null; then
+            if curl -sSf http://localhost:5165/ > /dev/null; then
                 echo "curl request was successful."
             else
                 echo "curl request failed."
@@ -82,7 +82,7 @@ jobs:
       
       - name: Run Bruno tests
         env:
-          HOST: http://localhost:5000
+          HOST: http://localhost:5165
         run: npx bruno run tests/integration/bruno.json --variables HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
 
       - name: Upload Bruno test results
