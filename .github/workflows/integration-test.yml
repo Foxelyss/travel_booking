@@ -52,7 +52,7 @@ jobs:
         env:
           ASPNETCORE_ENVIRONMENT: Development
           ASPNETCORE_URLS: http://localhost:5000
-        run: dotnet run &
+        run: dotnet run --project src/TravelBooking.csproj &
 
       - name: Wait for API to be ready
         run: |
