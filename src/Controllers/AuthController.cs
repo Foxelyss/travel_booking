@@ -188,5 +188,19 @@ public class AuthController : Controller
 
         return Results.Redirect(returnUrl ?? "/");
     }
+
+    [HttpGet("api/auth/logout")]
+    [Authorize]
+    public async Task<IResult> LogoutAsd(string? returnUrl)
+    {
+        Console.WriteLine("asdfa!@!");
+        var prop = new AuthenticationProperties()
+        {
+            RedirectUri = "index.html"
+        };
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return Results.Redirect(returnUrl ?? "/");
+    }
 }
 
