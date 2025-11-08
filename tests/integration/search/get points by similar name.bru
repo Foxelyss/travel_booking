@@ -1,11 +1,11 @@
 meta {
-  name: get point by name
+  name: get points by similar name
   type: http
-  seq: 5
+  seq: 8
 }
 
 get {
-  url: {{host}}/api/point/name/:name
+  url: {{host}}/api/point/search/:name
   body: json
   auth: inherit
 }

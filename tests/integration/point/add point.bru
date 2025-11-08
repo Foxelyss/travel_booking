@@ -11,11 +11,18 @@ post {
 }
 
 body:json {
-  {
-    "name":"Волгоград",
-    "city":"Волгоград",
-    "region":"Волгоградская область"
-  }
+  {{point_creation}}
+}
+
+script:post-response {
+  bru.setVar("latest_point", res.body.id);
+}
+
+tests {
+  test("Return 200", () => {
+    expect(res.status).to.equal(200);
+  });
+  
 }
 
 settings {

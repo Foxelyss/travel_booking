@@ -1,7 +1,7 @@
 meta {
-  name: get point
+  name: get deleted point
   type: http
-  seq: 2
+  seq: 6
 }
 
 get {
@@ -15,11 +15,9 @@ params:path {
 }
 
 tests {
-  test("Content of Point should be the same", ()=>{
-    let a = res.getBody();
-    delete a.id;
-    expect(a).to.be.eql(bru.getVar("point_creation"));
-  })
+  test("Shall return code 404", () => {
+    expect(res.status).to.be.eql(404);
+  });
 }
 
 settings {

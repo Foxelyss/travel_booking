@@ -1,17 +1,17 @@
 meta {
-  name: delete point copy
+  name: get company copy copy
   type: http
-  seq: 5
+  seq: 6
 }
 
-delete {
-  url: {{host}}/api/point/:id
+get {
+  url: {{host}}/api/company/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: {{latest_point}}
+  id: 1
 }
 
 settings {
