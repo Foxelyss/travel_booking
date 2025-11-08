@@ -1,7 +1,7 @@
 meta {
   name: Login
   type: http
-  seq: 1
+  seq: 3
 }
 
 post {
@@ -24,12 +24,12 @@ tests {
     expect(res.status).to.be.oneOf([200,201]);
   });
   
-  
-  test("JSON", () => {
-    expect(res.status).to.be.oneOf([200,201]);
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
   });
   
   test("access", () => {
+    expect(res.body.access_token).to.be.not.null;
     expect(res.body.access_token).to.be.a.string;
   });
 }

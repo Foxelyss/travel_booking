@@ -1,7 +1,7 @@
 meta {
   name: Register
   type: http
-  seq: 3
+  seq: 2
 }
 
 post {
@@ -10,6 +10,21 @@ post {
   auth: inherit
 }
 
+tests {
+  test("Return 200", () => {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
+  
+  test("Returned token", () => {
+    expect(res.token).to.be.a.string;
+  });
+}
+
 settings {
   encodeUrl: true
+  timeout: 0
 }
