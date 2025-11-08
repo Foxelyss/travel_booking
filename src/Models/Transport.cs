@@ -28,7 +28,7 @@ public class Transport
     public int CompanyId { get; set; }
 
     [Required]
-    public float Price { get; set; }
+    public decimal Price { get; set; }
 
     [Required]
     public uint PlaceCount { get; set; }
