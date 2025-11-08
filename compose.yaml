@@ -2,7 +2,7 @@ services:
   travel-booking-backend:
     build: .
     environment:
-      - DATABASE_URL=postgresql+asyncpg://user:password@simple-to-buy-db:5432/simple_to_buy
+      - ConnectionStrings__StoreContext=Host=travel-booking-db;Username=postgres;Password=postgres;Database=travelbooking
     volumes:
       - misc_data:/root/.aspnet
     ports:
