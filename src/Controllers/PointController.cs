@@ -53,13 +53,23 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public void EditTransporting(int id)
+        public async Task<IResult> EditPoint(int id, [FromBody] PointAdd newPointData)
         {
+            var point = _context.Points.FirstOrDefault(b => b.Id == id);
 
+            if (point == null) { return Results.NotFound(); }
+
+            point.Name = newPointData.name;
+            point.Region = newPointData.region;
+            point.City = newPointData.city;
+
+            await _context.SaveChangesAsync();
+
+            return Results.Ok(point);
         }
 
         [HttpDelete("{id}")]
-        public void RemoveTransporting(int id)
+        public void RemovePoint(int id)
         {
             _context.Points.Remove(_context.Points.Find(id));
 

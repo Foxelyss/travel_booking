@@ -30,7 +30,7 @@ namespace TravelBooking.Controllers
             {
                 if (_context.TransportMeans.Find(a) == null)
                 {
-                    return Results.NotFound($"Transport id #{a} not found");
+                    return Results.NotFound($"Transport mean id #{a} not found");
                 }
             }
 
@@ -58,7 +58,7 @@ namespace TravelBooking.Controllers
             });
             _context.SaveChanges();
 
-            _context.TransportingMeans.AddRange(registration.TransportingMean.Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
+            _context.TransportingMeans.AddRange(registration.TransportingMean.Distinct().ToArray().Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
             _context.SaveChanges();
 
             return Results.Ok();
@@ -78,10 +78,38 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IResult EditTransporting(int id)
+        public IResult EditTransporting(int id, [FromBody] TransportUpdateDto updateDto)
         {
-            return Results.Ok();
+            var transport = _context.Transports.Find(id);
+            if (transport == null)
+            {
+                return Results.NotFound();
+            }
+
+            // Validate the incoming data
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
+            // Update only the fields that are provided in the DTO
+            if (updateDto.Name != null) transport.Name = updateDto.Name;
+            if (updateDto.Departure.HasValue) transport.Departure = updateDto.Departure.Value;
+            if (updateDto.Arrival.HasValue) transport.Arrival = updateDto.Arrival.Value;
+            if (updateDto.DeparturePointId.HasValue) transport.DeparturePointId = updateDto.DeparturePointId.Value;
+            if (updateDto.ArrivalPointId.HasValue) transport.ArrivalPointId = updateDto.ArrivalPointId.Value;
+            if (updateDto.CompanyId.HasValue) transport.CompanyId = updateDto.CompanyId.Value;
+            if (updateDto.Price.HasValue) transport.Price = updateDto.Price.Value;
+            if (updateDto.PlaceCount.HasValue)
+            {
+                transport.PlaceCount = updateDto.PlaceCount.Value;
+                transport.FreePlaceCount = updateDto.PlaceCount.Value; // Adjust free places accordingly
+            }
+
+            _context.SaveChanges();
+            return Results.Ok(transport);
         }
+
 
         [HttpDelete("{id}")]
         public void RemoveTransporting(int id)

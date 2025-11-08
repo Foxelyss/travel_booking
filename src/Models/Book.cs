@@ -15,7 +15,7 @@ public class Book
     public required string Payment { get; set; }
 
     [Required]
-    public float Price { get; set; }
+    public decimal Price { get; set; }
 
     public int TransportationId { get; set; }
 

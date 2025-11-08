@@ -10,7 +10,7 @@ public record class TransportingRegistration(
         [Required] DateTime? Arrival,
         [Required] int[] TransportingMean,
         [Required] int? Company,
-        [Required] float? Price,
+        [Required] decimal? Price,
         [Required] uint? PlaceCount,
          uint FreePlaceCount
                )
