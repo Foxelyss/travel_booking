@@ -31,12 +31,15 @@ namespace TravelBooking.Controllers
         {
             return _context.Points.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{name}%".ToLower()));
         }
+        public record PointAdd(string name, string region, string city) { };
 
         [HttpPost("")]
-        public void AddPoint(string name, string region, string city)
+        public IResult AddPoint([FromBody] PointAdd pointAdd)
         {
-            _context.Points.Add(new Point { Name = name, Region = region, City = city });
+            var point = new Point { Name = pointAdd.name, Region = pointAdd.region, City = pointAdd.city };
+            _context.Points.Add(point);
             _context.SaveChanges();
+            return Results.Ok(point);
         }
 
         [HttpGet("{id}")]
@@ -58,10 +61,7 @@ namespace TravelBooking.Controllers
         [HttpDelete("{id}")]
         public void RemoveTransporting(int id)
         {
-            Point point = new Point() { Id = id, Name = "", Region = "", City = "" };
-
-            _context.Points.Attach(point);
-            _context.Points.Remove(point);
+            _context.Points.Remove(_context.Points.Find(id));
 
             _context.SaveChanges();
         }

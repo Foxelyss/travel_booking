@@ -1,21 +1,23 @@
 meta {
-  name: change point
+  name: get mean copy
   type: http
-  seq: 3
+  seq: 4
 }
 
-patch {
-  url: {{host}}/api/point/:id
+get {
+  url: {{host}}/api/mean/:id
   body: json
   auth: inherit
 }
 
 params:path {
-  id: {{latest_point}}
+  id: 1
 }
 
 body:json {
-  {{point_change}}
+  {
+    "name": "asdfas"
+  }
 }
 
 settings {
