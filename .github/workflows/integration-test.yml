@@ -1,5 +1,9 @@
 name: Integration Tests
 
+permissions:
+  checks: write
+  pull-requests: write
+
 on:
   push:
     branches: [ main ]
@@ -84,12 +88,21 @@ jobs:
         env:
           HOST: http://localhost:5165
         run: cd tests/integration && bru run --env-var host=$HOST --reporter-html ../../reports/results.html --reporter-junit ../../reports/results.xml
+        continue-on-error: true
 
       - name: Upload Bruno test results
         uses: actions/upload-artifact@v4
         with:
           name: TestResults
           path: reports/
+      
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (!cancelled())
+        with:
+          report_individual_runs: "true"
+          files: |
+            reports/results.xml
     
       - name: Stop API server
         run: |
