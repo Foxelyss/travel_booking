@@ -87,7 +87,7 @@ jobs:
       - name: Run Bruno tests
         env:
           HOST: http://localhost:5165
-        run: cd tests/integration && bru run --env-var host=$HOST --reporter-html ../../reports/results.html --reporter-junit ../../reports/results.xml
+        run: cd tests/integration && bru run --env-var host=$HOST --json-file-path data.json --reporter-html ../../reports/results.html --reporter-junit ../../reports/results.xml
         continue-on-error: true
 
       - name: Upload Bruno test results
