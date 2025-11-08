@@ -1,0 +1,15 @@
+meta {
+  name: book
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/api/point/login
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

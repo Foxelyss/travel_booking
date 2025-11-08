@@ -1,0 +1,28 @@
+meta {
+  name: get points by similar name
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{host}}/api/point/search/:name
+  body: json
+  auth: inherit
+}
+
+params:path {
+  name: Свердловск
+}
+
+body:json {
+  {
+    "name":"Волгоград",
+    "city":"Волгоград",
+    "region":"Волгоградская область"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

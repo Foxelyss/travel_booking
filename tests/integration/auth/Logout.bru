@@ -1,0 +1,25 @@
+meta {
+  name: Logout
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/api/auth/logout
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:multipart-form {
+  email: asd
+  password: 123
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

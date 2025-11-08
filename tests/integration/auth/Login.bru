@@ -1,0 +1,40 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/api/auth/login
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  email: asd@asd.com
+  password: 123
+}
+
+script:post-response {
+  bru.setVar("access_token", res.body.access_token)
+}
+
+tests {
+  test("200", () => {
+    expect(res.status).to.be.oneOf([200,201]);
+  });
+  
+  
+  test("JSON", () => {
+    expect(res.status).to.be.oneOf([200,201]);
+  });
+  
+  test("access", () => {
+    expect(res.body.access_token).to.be.a.string;
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
