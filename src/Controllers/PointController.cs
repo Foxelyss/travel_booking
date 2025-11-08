@@ -69,11 +69,14 @@ namespace TravelBooking.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void RemovePoint(int id)
+        public IResult RemovePoint(int id)
         {
-            _context.Points.Remove(_context.Points.Find(id));
+            var point = _context.Points.Find(id);
+            if (point == null) { return Results.NotFound(); }
+            _context.Points.Remove(point);
 
             _context.SaveChanges();
+            return Results.Ok();
         }
     }
 }

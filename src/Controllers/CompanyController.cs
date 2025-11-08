@@ -10,7 +10,13 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-
+        public class CompanyPatchDTO
+        {
+            public string Name { get; set; }
+            public string RegistrationAddress { get; set; }
+            public string Phone { get; set; }
+            public string Inn { get; set; }
+        }
         private readonly StoreContext _context;
 
         public CompanyController(StoreContext context)
@@ -49,18 +55,41 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IResult EditCompany(int id)
+        public IResult EditCompany(int id, [FromBody] CompanyPatchDTO companyPatch)
         {
             var company = _context.Companies.SingleOrDefault(c => c.Id == id);
 
-            // company = new Company
-            // {
-            // }
-            // ;
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
+            if (company == null)
+            {
+                return Results.NotFound();
+            }
+
+
+            if (companyPatch.Name != null)
+            {
+                company.Name = companyPatch.Name;
+            }
+            if (companyPatch.RegistrationAddress != null)
+            {
+                company.RegistrationAddress = companyPatch.RegistrationAddress;
+            }
+            if (companyPatch.Phone != null)
+            {
+                company.Phone = companyPatch.Phone;
+            }
+            if (companyPatch.Inn != null)
+            {
+                company.Inn = companyPatch.Inn;
+            }
 
             _context.SaveChanges();
 
-            return Results.Ok();
+            return Results.Ok(company);
         }
 
         [HttpDelete("{id}")]

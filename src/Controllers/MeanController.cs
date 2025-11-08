@@ -16,6 +16,7 @@ namespace TravelBooking.Controllers
         {
             _context = context;
         }
+
         [HttpPost("")]
         public void AddMean(string name)
         {
@@ -47,9 +48,18 @@ namespace TravelBooking.Controllers
             return Results.Ok(mean);
         }
 
+        public record TransportingMeanEdit(string name) { };
+
         [HttpPatch("{id}")]
-        public IResult EditMean(int id)
+        public IResult EditMean(int id, [FromBody] TransportingMeanEdit transportingMeanEdit)
         {
+            var mean = _context.TransportMeans.FirstOrDefault(b => b.Id == id);
+
+            if (mean == null) { return Results.NotFound(); }
+
+            mean.Name = transportingMeanEdit.name;
+            _context.SaveChanges();
+
             return Results.Ok();
         }
 
