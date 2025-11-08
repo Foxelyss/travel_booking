@@ -76,9 +76,6 @@ jobs:
 
       - name: Install Bruno CLI
         run: npm install -g @usebruno/cli
-
-      - name: Changing dir
-        run: cd tests/integration
       
       - name: Create reports directory
         run: mkdir -p reports
@@ -86,7 +83,7 @@ jobs:
       - name: Run Bruno tests
         env:
           HOST: http://localhost:5165
-        run: bru run --env-var HOST=$HOST --reporter-html reports/results.html --reporter-junit reports/results.xml
+        run: cd tests/integration && bru run --env-var HOST=$HOST --reporter-html ../../reports/results.html --reporter-junit ../../reports/results.xml
 
       - name: Upload Bruno test results
         uses: actions/upload-artifact@v4
