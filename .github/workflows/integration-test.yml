@@ -96,7 +96,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: (!cancelled())
         with:
-          report_individual_runs: "true"
           files: |
             reports/results.xml
     
