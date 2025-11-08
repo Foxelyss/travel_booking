@@ -86,13 +86,11 @@ namespace TravelBooking.Controllers
                 return Results.NotFound();
             }
 
-            // Validate the incoming data
             if (!ModelState.IsValid)
             {
                 return Results.BadRequest(ModelState);
             }
 
-            // Update only the fields that are provided in the DTO
             if (updateDto.Name != null) transport.Name = updateDto.Name;
             if (updateDto.Departure.HasValue) transport.Departure = updateDto.Departure.Value;
             if (updateDto.Arrival.HasValue) transport.Arrival = updateDto.Arrival.Value;
@@ -103,7 +101,7 @@ namespace TravelBooking.Controllers
             if (updateDto.PlaceCount.HasValue)
             {
                 transport.PlaceCount = updateDto.PlaceCount.Value;
-                transport.FreePlaceCount = updateDto.PlaceCount.Value; // Adjust free places accordingly
+                transport.FreePlaceCount = updateDto.PlaceCount.Value;
             }
 
             _context.SaveChanges();
