@@ -1,0 +1,26 @@
+meta {
+  name: get mean
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/api/mean/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "name": "asdfas"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

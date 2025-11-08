@@ -16,8 +16,8 @@ body:multipart-form {
 }
 
 tests {
-  test("200", () => {
-    expect(res.status).to.not.be.oneOf([200,201]);
+  test("Shall return code 4XX", () => {
+    expect(res.status).to.be.oneOf([400, 401, 403]);
   });
   
   test("Content type is JSON", () => {

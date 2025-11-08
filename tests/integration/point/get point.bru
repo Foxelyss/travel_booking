@@ -1,0 +1,28 @@
+meta {
+  name: get point
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/api/point/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+body:json {
+  {
+    "name":"Волгоград",
+    "city":"Волгоград",
+    "region":"Волгоградская область"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

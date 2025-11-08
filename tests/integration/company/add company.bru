@@ -1,0 +1,25 @@
+meta {
+  name: add company
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/api/company/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"Контора Тест",
+    "phone": "123123312",
+    "address": "asdasd",
+    "INN": "asd"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
