@@ -6,12 +6,16 @@ meta {
 
 patch {
   url: {{host}}/api/point/:id
-  body: none
+  body: json
   auth: inherit
 }
 
 params:path {
   id: 
+}
+
+body:json {
+  {{company_change}}
 }
 
 settings {

@@ -6,8 +6,12 @@ meta {
 
 patch {
   url: {{host}}/api/point/login
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {{mean_change}}
 }
 
 settings {
