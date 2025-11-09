@@ -11,13 +11,21 @@ get {
 }
 
 params:path {
-  id: 1
+  id: {{latest_mean}}
 }
 
 body:json {
   {
     "name": "asdfas"
   }
+}
+
+tests {
+  test("Content of Point should be the same", ()=>{
+    let a = res.getBody();
+    delete a.id;
+    expect(a).to.be.eql(bru.getVar("mean_creation"));
+  })
 }
 
 settings {

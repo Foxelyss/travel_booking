@@ -11,7 +11,13 @@ get {
 }
 
 params:path {
-  id: 1
+  id: {{latest_company}}
+}
+
+tests {
+  test("Shall return code 404", () => {
+    expect(res.status).to.be.eql(404);
+  });
 }
 
 settings {

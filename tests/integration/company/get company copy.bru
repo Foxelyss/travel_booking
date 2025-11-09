@@ -11,7 +11,15 @@ get {
 }
 
 params:path {
-  id: 1
+  id: {{latest_company}}
+}
+
+tests {
+  test("Content of Point should be the same", ()=>{
+    let a = res.getBody();
+    delete a.id;
+    expect(a).to.be.eql(bru.getVar("mean_change_result"));
+  });
 }
 
 settings {

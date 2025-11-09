@@ -5,27 +5,23 @@ meta {
 }
 
 get {
-  url: {{host}}/api/transport/
-  body: json
+  url: {{host}}/api/transport/:id
+  body: none
   auth: inherit
 }
 
-body:json {
-  {
-    "Name":"Поезд Волгоград-Казань",
-    "Price":13123.10,
-    "Company":1,
-    "Arrival":"2012-12-31T22:00:00.000Z",
-    "Departure":"2012-12-31T22:00:00.000Z",
-    "PlaceCount":132,
-    "ArrivalPoint":1,
-    "DeparturePoint":2,
-    "TransportingMean":[1,2]
-  }
+params:path {
+  id: {{latest_transport}}
 }
 
 body:multipart-form {
   asfd: 
+}
+
+tests {
+  test("Shall return code 404", () => {
+    expect(res.status).to.be.eql(404);
+  });
 }
 
 settings {

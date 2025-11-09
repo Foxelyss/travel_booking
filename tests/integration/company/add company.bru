@@ -14,6 +14,10 @@ body:json {
   {{company_creation}}
 }
 
+script:post-response {
+  bru.setVar("latest_company", res.body.id);
+}
+
 settings {
   encodeUrl: true
   timeout: 0

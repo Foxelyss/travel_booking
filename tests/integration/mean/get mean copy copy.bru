@@ -11,13 +11,19 @@ get {
 }
 
 params:path {
-  id: 1
+  id: {{latest_mean}}
 }
 
 body:json {
   {
     "name": "asdfas"
   }
+}
+
+tests {
+  test("Shall return code 404", () => {
+    expect(res.status).to.be.eql(404);
+  });
 }
 
 settings {

@@ -5,9 +5,13 @@ meta {
 }
 
 delete {
-  url: {{host}}/api/point/login
+  url: {{host}}/api/company/:id
   body: none
   auth: inherit
+}
+
+params:path {
+  id: {{latest_company}}
 }
 
 settings {

@@ -28,6 +28,10 @@ body:multipart-form {
   asfd: 
 }
 
+script:post-response {
+  bru.setVar("latest_transport", res.body.id);
+}
+
 settings {
   encodeUrl: true
   timeout: 0
