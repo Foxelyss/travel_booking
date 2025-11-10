@@ -18,6 +18,12 @@ body:multipart-form {
   asfd: 
 }
 
+tests {
+  test("Content of Point should be the same", ()=>{
+    expect(res.body).to.include(bru.getVar("mean_change_result"));
+  });
+}
+
 settings {
   encodeUrl: true
   timeout: 0

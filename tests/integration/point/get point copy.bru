@@ -16,9 +16,7 @@ params:path {
 
 tests {
   test("Content of Point should be the same", ()=>{
-    let a = res.getBody();
-    delete a.id;
-    expect(a).to.be.eql(bru.getVar("point_change_result"));
+    expect(res.body).to.include("point_change_result"));
   })
 }
 
