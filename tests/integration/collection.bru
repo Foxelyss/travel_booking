@@ -7,8 +7,4 @@ tests {
     expect(res.getResponseTime()).to.be.below(250);
   });
   
-  test("Content type is JSON", () => {
-    expect(res.getHeader("content-type")).to.contain("application/json");
-  });
-  
 }

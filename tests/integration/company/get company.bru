@@ -14,6 +14,16 @@ params:path {
   id: {{latest_company}}
 }
 
+tests {
+  test("Content of Company should be the same", ()=>{
+    expect(res.body).to.include(bru.getVar("company_creation"));
+  });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
+}
+
 settings {
   encodeUrl: true
   timeout: 0
