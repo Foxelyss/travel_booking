@@ -24,6 +24,10 @@ tests {
   test("Content of Point should be the same", ()=>{
     expect(res.body).to.include(bru.getVar("mean_change_result"));
   });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
 }
 
 settings {
