@@ -49,7 +49,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Install EF Core CLI
-        run: dotnet tool install --global dotnet-ef
+        run: dotnet tool install --global dotnet-ef --version 9.0.10
 
       - name: Apply EF migrations
         run: dotnet ef database update --project src/TravelBooking.csproj --no-build
