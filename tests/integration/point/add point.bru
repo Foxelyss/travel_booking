@@ -23,6 +23,14 @@ tests {
     expect(res.status).to.equal(200);
   });
   
+  test("Content of Point should be the same", ()=>{
+    expect(res.body).to.include(bru.getVar("point_creation"));
+  });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
+  
 }
 
 settings {
