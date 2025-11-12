@@ -18,10 +18,13 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPost("")]
-        public void AddMean([FromBody] TransportingMean mean)
+        public IResult AddMean([FromBody] TransportingMean mean)
         {
-            _context.TransportMeans.Add(new TransportingMean { Name = mean.Name });
+            var transportingMean = new TransportingMean { Name = mean.Name };
+            _context.TransportMeans.Add(transportingMean);
             _context.SaveChanges();
+
+            return Results.Ok(transportingMean);
         }
 
         [HttpGet("{id}")]
