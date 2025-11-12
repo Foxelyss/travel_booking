@@ -6,18 +6,12 @@ meta {
 
 get {
   url: {{host}}/api/mean/:id
-  body: json
+  body: none
   auth: inherit
 }
 
 params:path {
   id: {{latest_mean}}
-}
-
-body:json {
-  {
-    "name": "asdfas"
-  }
 }
 
 tests {
