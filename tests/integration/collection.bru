@@ -2,13 +2,6 @@ vars:pre-request {
   host: http://localhost:5165
 }
 
-vars:post-response {
-  latest_point: 
-  latest_mean: 
-  latest_company: 
-  latest_transport: 
-}
-
 tests {
   test("Response time is less than 250ms", () => {
     expect(res.getResponseTime()).to.be.below(250);
