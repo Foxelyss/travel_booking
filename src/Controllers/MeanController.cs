@@ -18,7 +18,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPost("")]
-        public void AddMean(string name)
+        public void AddMean([FromBody] string name)
         {
             _context.TransportMeans.Add(new TransportingMean { Name = name });
             _context.SaveChanges();

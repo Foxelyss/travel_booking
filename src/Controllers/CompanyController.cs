@@ -28,17 +28,18 @@ namespace TravelBooking.Controllers
         [Consumes("application/json")]
         public IResult AddCompany(CompanyRegistration companyRegistration)
         {
-            _context.Companies.Add(new Company
+            var company = new Company
             {
                 Name = companyRegistration.name,
                 RegistrationAddress = companyRegistration.address,
                 Phone = companyRegistration.phone,
                 Inn = companyRegistration.INN
-            });
+            };
+            _context.Companies.Add(company);
 
             _context.SaveChanges();
 
-            return Results.Ok();
+            return Results.Ok(company);
         }
 
         [HttpGet("{id}")]
