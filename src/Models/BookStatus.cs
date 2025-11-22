@@ -1,14 +1,9 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace TravelBooking.Models;
 
-public class BookStatus
+public enum BookStatus
 {
-    [Key]
-    public int Id { get; set; }
-
-    [Required]
-    [MaxLength(128)]
-    public required string Name { get; set; }
+    Upcoming = 0,
+    Completed = 1,
+    Cancelled = 2,
+    Missed = 3
 }
