@@ -15,6 +15,7 @@ namespace TravelBooking.Controllers
     public class BookController : ControllerBase
     {
         private readonly StoreContext _context;
+        private static readonly SemaphoreSlim _orderSemaphore = new SemaphoreSlim(1, 1);
 
         public BookController(StoreContext context)
         {
@@ -33,18 +34,21 @@ namespace TravelBooking.Controllers
         [HttpGet("bookings")]
         public IEnumerable<Book> GetTicketsForUser()
         {
-            string email = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Guid id = Guid.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-            return _context.Books.Join(_context.Passengers, book => book.PassengerId, passenger => passenger.Id, (book, passenger) => new { book, passenger })
-                .Include(x => x.book.Account)
-                .Where(x => x.book.Account.Email == email)
-                .Select(x => x.book);
+            return _context.Books
+                .Include(x => x.Account)
+                .Include(x => x.Transportation)
+                .Where(x => x.Account.Id == id);
         }
 
         [Authorize]
         [HttpPost("book")]
         public async Task<IResult> Book(int transporting, String name, String surname, String middle_name, String email, long passport, long phone)
         {
+            Guid id = Guid.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            await _orderSemaphore.WaitAsync();
             var transportingObj = _context.Transports.Find(transporting);
 
             if (transportingObj == null)
@@ -62,6 +66,26 @@ namespace TravelBooking.Controllers
                 await _context.SaveChangesAsync();
             }
 
+            _orderSemaphore.Release();
+
+            var passenger = new Passenger
+            {
+                Firstname = name,
+                Surname = surname,
+                Lastname = middle_name,
+                Passport = passport,
+            };
+
+            _context.Passengers.Add(passenger);
+
+            var booking = new Book
+            {
+                AccountId = id,
+                Payment = "MIR",
+                Price = transportingObj.Price,
+                PassengerId = passenger.Id
+            };
+            _context.Books.Add(booking);
 
             return Results.Ok();
         }
@@ -70,6 +94,8 @@ namespace TravelBooking.Controllers
         [HttpPost("return")]
         public async Task<IResult> ReturnTicket(long id)
         {
+            await _orderSemaphore.WaitAsync();
+
             var booking = _context.Books.Find(id);
 
             var transportingObj = _context.Transports.Find(id);
@@ -89,9 +115,10 @@ namespace TravelBooking.Controllers
                 return Results.Conflict();
             }
 
-            booking.StatusId = 1;
+            booking.Status = BookStatus.Cancelled;
             await _context.SaveChangesAsync();
 
+            _orderSemaphore.Release();
             return Results.Ok();
         }
     }

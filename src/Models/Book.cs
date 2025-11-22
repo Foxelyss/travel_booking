@@ -22,8 +22,7 @@ public class Book
     public virtual Passenger? Passenger { get; set; }
     public virtual Transport? Transportation { get; set; }
 
-    public int StatusId;
-    public virtual BookStatus? Status { get; set; }
+    public BookStatus Status { get; set; } = BookStatus.Upcoming;
 
     public Guid AccountId { get; set; }
     public virtual Account? Account { get; set; }

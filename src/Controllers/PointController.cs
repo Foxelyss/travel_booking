@@ -31,6 +31,13 @@ namespace TravelBooking.Controllers
         {
             return _context.Points.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{name}%".ToLower()));
         }
+
+        [HttpGet("all")]
+        public IResult GetPoints()
+        {
+            return Results.Ok(_context.Points.Take(2000));
+        }
+
         public record PointAdd(string name, string region, string city) { };
 
         [HttpPost("")]
