@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace TravelBooking.Models;
 
@@ -11,8 +12,7 @@ public class Account
     [Required, Phone]
     public required string Phone { get; set; }
 
-    [Required]
-    [MaxLength(128)]
+    [Required, MaxLength(128)]
     public required string Email { get; set; }
 
     [Required]

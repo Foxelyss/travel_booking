@@ -13,25 +13,25 @@ public class Transport
     public required string Name { get; set; }
 
     [Required]
-    public DateTime Departure { get; set; }
+    public required DateTime Departure { get; set; }
 
     [Required]
-    public DateTime Arrival { get; set; }
+    public required DateTime Arrival { get; set; }
 
     [Required]
-    public int DeparturePointId { get; set; }
+    public required int DeparturePointId { get; set; }
 
     [Required]
-    public int ArrivalPointId { get; set; }
+    public required int ArrivalPointId { get; set; }
 
     [Required]
-    public int CompanyId { get; set; }
+    public required int CompanyId { get; set; }
 
     [Required]
-    public decimal Price { get; set; }
+    public required decimal Price { get; set; }
 
     [Required]
-    public uint PlaceCount { get; set; }
+    public required uint PlaceCount { get; set; }
 
     [Required]
     public uint FreePlaceCount { get; set; }

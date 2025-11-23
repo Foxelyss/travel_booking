@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -21,20 +22,12 @@ namespace TravelBooking.Controllers
         {
             _context = context;
         }
-        public record Ticket(int id, String name, int transporting,
-                               DateTime start, DateTime end, String startPoint,
-                               String endPoint, float price,
-                               String mean, String company,
-                               String payment
-          )
-        {
-        }
 
         [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
         [HttpGet("bookings")]
         public IEnumerable<Book> GetTicketsForUser()
         {
-            Guid id = Guid.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Guid id = HttpContext.User.GetGuid();
 
             return _context.Books
                 .Include(x => x.Account)
@@ -43,10 +36,10 @@ namespace TravelBooking.Controllers
         }
 
         [Authorize]
-        [HttpPost("book")]
-        public async Task<IResult> Book(int transporting, String name, String surname, String middle_name, String email, long passport, long phone)
+        [HttpPost("book/{transporting}")]
+        public async Task<IResult> Book(int transporting, Booking booking)
         {
-            Guid id = Guid.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Guid id = HttpContext.User.GetGuid();
 
             await _orderSemaphore.WaitAsync();
             var transportingObj = _context.Transports.Find(transporting);
@@ -70,22 +63,23 @@ namespace TravelBooking.Controllers
 
             var passenger = new Passenger
             {
-                Firstname = name,
-                Surname = surname,
-                Lastname = middle_name,
-                Passport = passport,
+                Firstname = booking.name,
+                Surname = booking.surname,
+                Lastname = booking.middle_name,
+                Passport = booking.passport,
             };
 
             _context.Passengers.Add(passenger);
 
-            var booking = new Book
+            var booking_c = new Book
             {
                 AccountId = id,
                 Payment = "MIR",
                 Price = transportingObj.Price,
-                PassengerId = passenger.Id
+                PassengerId = passenger.Id,
+                TransportationId = transporting
             };
-            _context.Books.Add(booking);
+            _context.Books.Add(booking_c);
 
             return Results.Ok();
         }

@@ -10,13 +10,6 @@ namespace TravelBooking.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        public class CompanyPatchDTO
-        {
-            public string Name { get; set; }
-            public string RegistrationAddress { get; set; }
-            public string Phone { get; set; }
-            public string Inn { get; set; }
-        }
         private readonly StoreContext _context;
 
         public CompanyController(StoreContext context)

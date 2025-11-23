@@ -27,12 +27,12 @@ public class AuthController : Controller
     }
 
     [HttpPost("api/auth/login")]
+    [Consumes("application/x-www-form-urlencoded")]
     public IResult Login()
     {
         HttpContext context = HttpContext;
-        // получаем из формы email и пароль
+
         var form = context.Request.Form;
-        // если email и/или пароль не установлены, посылаем статусный код ошибки 400
         if (!form.ContainsKey("email") || !form.ContainsKey("password"))
             return Results.BadRequest("Email и/или пароль не установлены");
 
@@ -68,8 +68,8 @@ public class AuthController : Controller
     }
 
     [HttpPost("api/auth/register")]
-    [Consumes("application/json")]
-    public IResult RegisterFromAPI([FromBody] AccountRegistration accountRegistration)
+    [Consumes("application/x-www-form-urlencoded")]
+    public IResult RegisterFromAPI([FromForm] AccountRegistration accountRegistration)
     {
         if (!ModelState.IsValid)
         {
@@ -98,7 +98,7 @@ public class AuthController : Controller
     [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public IResult AboutUser()
     {
-        return Results.Ok(HttpContext.User.HasClaim(ClaimTypes.Role, "regular"));
+        return Results.Ok(_context.Accounts.Find(HttpContext.User.GetGuid()));
     }
 
     [HttpGet("api/auth/logout")]
