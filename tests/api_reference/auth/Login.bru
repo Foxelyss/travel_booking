@@ -6,8 +6,13 @@ meta {
 
 post {
   url: {{host}}/api/auth/login
-  body: multipartForm
+  body: formUrlEncoded
   auth: inherit
+}
+
+body:form-urlencoded {
+  email: 123
+  password: 123
 }
 
 body:multipart-form {

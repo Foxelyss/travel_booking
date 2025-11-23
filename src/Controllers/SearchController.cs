@@ -19,13 +19,6 @@ namespace TravelBooking.Controllers
             _context = context;
         }
 
-        public record TransportingResult(int id, String name, DateTime start, DateTime end,
-                                         String startPoint, String endPoint,
-                                         int arr, int dep, float price, String mean,
-                                         String company, int places, int freePlaceQuantity)
-        {
-        }
-
         [HttpGet("search")]
         public IEnumerable<object> searchForTransport(int point_a, int point_b, long wanted_time, int mean, int page)
         {
@@ -34,7 +27,7 @@ namespace TravelBooking.Controllers
             .Include(point_b => point_b.ArrivalPoint)
             .Include(means => means.TransportingMeans)
             .Where(t => t.DeparturePointId == point_a && t.ArrivalPointId == point_b && t.TransportingMeans.Any(m => m.Id == mean))
-            .OrderBy(x => MathF.Abs(x.Departure.ToFileTime() - wanted_time))
+            .OrderBy(x => Math.Abs(x.Departure.ToFileTime() - wanted_time))
             .Skip(page * 10)
             .Take(10);
         }

@@ -56,6 +56,7 @@ namespace TravelBooking.Controllers
                 PlaceCount = registration.PlaceCount.GetValueOrDefault(),
                 FreePlaceCount = registration.PlaceCount.GetValueOrDefault()
             });
+
             _context.SaveChanges();
 
             _context.TransportingMeans.AddRange(registration.TransportingMean.Distinct().ToArray().Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
@@ -110,14 +111,20 @@ namespace TravelBooking.Controllers
 
 
         [HttpDelete("{id}")]
-        public void RemoveTransporting(int id)
+        public IResult RemoveTransporting(int id)
         {
-            Transport point = new Transport() { Id = id, Name = "" };
+            Transport? point = _context.Transports.Find(id);
+
+            if (point == null)
+            {
+                return Results.NotFound();
+            }
 
             _context.Transports.Attach(point);
             _context.Transports.Remove(point);
 
             _context.SaveChanges();
+            return Results.Ok();
         }
     }
 }
