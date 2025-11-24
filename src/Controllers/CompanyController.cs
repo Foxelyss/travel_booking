@@ -49,7 +49,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IResult EditCompany(int id, [FromBody] CompanyPatchDTO companyPatch)
+        public IResult EditCompany(int id, [FromBody] CompanyPatch companyPatch)
         {
             var company = _context.Companies.SingleOrDefault(c => c.Id == id);
 

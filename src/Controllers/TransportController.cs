@@ -34,16 +34,20 @@ namespace TravelBooking.Controllers
                 }
             }
 
-            if (_context.Transports.Find(registration.ArrivalPoint.GetValueOrDefault()) == null)
+            if (_context.Points.Find(registration.ArrivalPoint.GetValueOrDefault()) == null)
             {
-                return Results.NotFound($"ArrivalPoint id #{registration.ArrivalPoint} not found");
+                return Results.NotFound($"ArrivalPoint id #{registration.ArrivalPoint.GetValueOrDefault()} not found");
             }
 
-            if (_context.Transports.Find(registration.DeparturePoint.GetValueOrDefault()) == null)
+            if (_context.Points.Find(registration.DeparturePoint.GetValueOrDefault()) == null)
             {
-                return Results.NotFound($"DeparturePoint id #{registration.DeparturePoint} not found");
+                return Results.NotFound($"DeparturePoint id #{registration.DeparturePoint.GetValueOrDefault()} not found");
             }
 
+            if (_context.Companies.Find(registration.Company.GetValueOrDefault()) == null)
+            {
+                return Results.NotFound($"Company id #{registration.Company.GetValueOrDefault()} not found");
+            }
             var obj = _context.Transports.Add(new Transport
             {
                 Name = registration.Name,

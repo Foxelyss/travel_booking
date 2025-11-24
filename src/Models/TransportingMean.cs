@@ -14,5 +14,5 @@ public class TransportingMean
     [MaxLength(128)]
     public required string Name { get; set; }
     [JsonIgnore]
-    public IEnumerable<Transport>? Transportations { get; set; }
+    public ICollection<Transport>? Transportations { get; set; }
 }

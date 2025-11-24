@@ -39,6 +39,7 @@ public class Transport
     public virtual Point? DeparturePoint { get; set; }
     public virtual Point? ArrivalPoint { get; set; }
     public virtual Company? Company { get; set; }
+    public virtual string? CompanyName { get; set; }
 
-    public IEnumerable<TransportingMean>? TransportingMeans { get; set; }
+    public ICollection<TransportingMean>? TransportingMeans { get; set; }
 }

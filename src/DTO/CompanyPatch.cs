@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.DTO;
 
-public class CompanyPatchDTO
+public class CompanyPatch
 {
     public string Name { get; set; }
     public string RegistrationAddress { get; set; }
