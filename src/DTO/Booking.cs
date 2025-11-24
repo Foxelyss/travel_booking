@@ -5,12 +5,13 @@ namespace TravelBooking.DTO;
 
 public class Booking
 {
+    [Required] public required int transporting;
     [Required, MaxLength(256)]
-    public string name;
+    public required string Name;
     [Required, MaxLength(256)]
-    public string surname;
+    public required string Surname;
     [Required, MaxLength(256)]
-    public string middle_name;
+    public required string MiddleName;
     [Required, MaxLength(10)]
-    public string passport;
+    public required string passport;
 }

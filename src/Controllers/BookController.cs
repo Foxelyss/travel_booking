@@ -37,12 +37,12 @@ namespace TravelBooking.Controllers
 
         [Authorize]
         [HttpPost("book/{transporting}")]
-        public async Task<IResult> Book(int transporting, Booking booking)
+        public async Task<IResult> Book(Booking booking)
         {
             Guid id = HttpContext.User.GetGuid();
 
             await _orderSemaphore.WaitAsync();
-            var transportingObj = _context.Transports.Find(transporting);
+            var transportingObj = _context.Transports.Find(booking.transporting);
 
             if (transportingObj == null)
             {
@@ -63,9 +63,9 @@ namespace TravelBooking.Controllers
 
             var passenger = new Passenger
             {
-                Firstname = booking.name,
-                Surname = booking.surname,
-                Lastname = booking.middle_name,
+                Firstname = booking.Name,
+                Surname = booking.Surname,
+                Middlename = booking.MiddleName,
                 Passport = booking.passport,
             };
 
@@ -77,7 +77,7 @@ namespace TravelBooking.Controllers
                 Payment = "MIR",
                 Price = transportingObj.Price,
                 PassengerId = passenger.Id,
-                TransportationId = transporting
+                TransportationId = booking.transporting
             };
             _context.Books.Add(booking_c);
 
@@ -86,8 +86,10 @@ namespace TravelBooking.Controllers
 
         [Authorize]
         [HttpPost("return")]
-        public async Task<IResult> ReturnTicket(long id)
+        public async Task<IResult> ReturnTicket([FromForm] long id)
         {
+            Guid userid = HttpContext.User.GetGuid();
+
             await _orderSemaphore.WaitAsync();
 
             var booking = _context.Books.Find(id);
@@ -97,6 +99,11 @@ namespace TravelBooking.Controllers
             if (transportingObj == null || booking == null)
             {
                 return Results.NotFound();
+            }
+
+            if (booking.AccountId == userid)
+            {
+                return Results.Forbid();
             }
 
             if (transportingObj.FreePlaceCount <= transportingObj.PlaceCount)

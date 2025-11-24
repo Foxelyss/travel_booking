@@ -27,7 +27,26 @@ namespace TravelBooking.Controllers
             .Include(point_b => point_b.ArrivalPoint)
             .Include(means => means.TransportingMeans)
             .Where(t => t.DeparturePointId == point_a && t.ArrivalPointId == point_b && t.TransportingMeans.Any(m => m.Id == mean))
-            .OrderBy(x => Math.Abs(x.Departure.ToFileTime() - wanted_time))
+            // .OrderBy(x => Math.Abs(x.Departure.ToUnixTime() - wanted_time))
+            .Include(company => company.Company)
+            .Select(o => new
+            {
+                Id = o.Id,
+                Name = o.Name,
+                Arrival = o.Arrival,
+                ArrivalPoint = o.ArrivalPoint,
+                // ArrivalPointId = o.ArrivalPointId,
+                Departure = o.Departure,
+                DeparturePoint = o.DeparturePoint,
+                // DeparturePointId = o.DeparturePointId,
+                Price = o.Price,
+                TransportingMeans = o.TransportingMeans,
+                // Company = null,
+                CompanyId = o.CompanyId,
+                PlaceCount = o.PlaceCount,
+                FreePlaceCount = o.FreePlaceCount,
+                CompanyName = o.Company.Name,
+            })
             .Skip(page * 10)
             .Take(10);
         }
