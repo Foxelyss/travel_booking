@@ -43,9 +43,16 @@ namespace TravelBooking.Controllers
         [HttpPost("")]
         public IResult AddPoint([FromBody] PointAdd pointAdd)
         {
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
             var point = new Point { Name = pointAdd.name, Region = pointAdd.region, City = pointAdd.city };
+
             _context.Points.Add(point);
             _context.SaveChanges();
+
             return Results.Ok(point);
         }
 

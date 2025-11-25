@@ -16,11 +16,12 @@ namespace TravelBooking.Controllers;
 public class BookController : ControllerBase
 {
     private readonly StoreContext _context;
-    private static readonly SemaphoreSlim _orderSemaphore = new SemaphoreSlim(0, 2);
+    private static readonly SemaphoreSlim _orderSemaphore = new SemaphoreSlim(0, 1);
 
     public BookController(StoreContext context)
     {
         _context = context;
+        _orderSemaphore.Release(1);
     }
 
     [HttpGet("bookings")]
@@ -32,7 +33,7 @@ public class BookController : ControllerBase
         return _context.Books
             .Include(x => x.Account)
             .Include(x => x.Transportation)
-            .Where(x => x.Account.Id == id);
+            .Where(x => x.Account!.Id == id);
     }
 
     [HttpPost("book")]
@@ -47,6 +48,7 @@ public class BookController : ControllerBase
 
         Guid id = HttpContext.User.GetGuid();
 
+        await _orderSemaphore.WaitAsync();
         var transportingObj = _context.Transports.Find(booking.transporting.GetValueOrDefault());
         Console.WriteLine(booking.transporting.GetValueOrDefault());
 
@@ -57,16 +59,17 @@ public class BookController : ControllerBase
 
         if (transportingObj.FreePlaceCount <= 0)
         {
+            _orderSemaphore.Release();
+
             return Results.Conflict();
         }
         else
         {
-            // await _orderSemaphore.WaitAsync();
 
             transportingObj.FreePlaceCount--;
             await _context.SaveChangesAsync();
 
-            // _orderSemaphore.Release();
+            _orderSemaphore.Release();
         }
 
 
@@ -101,27 +104,31 @@ public class BookController : ControllerBase
 
 
         var booking = _context.Books.Find(id);
+        await _orderSemaphore.WaitAsync();
 
         var transportingObj = _context.Transports.Find(id);
 
         if (transportingObj == null || booking == null)
         {
+            _orderSemaphore.Release();
+
             return Results.NotFound();
         }
 
         if (booking.AccountId == userid)
         {
+            _orderSemaphore.Release();
+
             return Results.Forbid();
         }
 
         if (transportingObj.FreePlaceCount <= transportingObj.PlaceCount)
         {
-            // await _orderSemaphore.WaitAsync();
 
             transportingObj.FreePlaceCount++;
             await _context.SaveChangesAsync();
 
-            // _orderSemaphore.Release();
+            _orderSemaphore.Release();
         }
         else
         {

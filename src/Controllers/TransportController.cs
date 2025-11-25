@@ -51,8 +51,8 @@ namespace TravelBooking.Controllers
             var obj = _context.Transports.Add(new Transport
             {
                 Name = registration.Name,
-                Departure = registration.Departure.GetValueOrDefault(),
-                Arrival = registration.Arrival.GetValueOrDefault(),
+                Departure = registration.Departure.GetValueOrDefault().ToUniversalTime(),
+                Arrival = registration.Arrival.GetValueOrDefault().ToUniversalTime(),
                 DeparturePointId = registration.DeparturePoint.GetValueOrDefault(),
                 ArrivalPointId = registration.ArrivalPoint.GetValueOrDefault(),
                 CompanyId = registration.Company.GetValueOrDefault(),
