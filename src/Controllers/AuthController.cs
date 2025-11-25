@@ -16,6 +16,8 @@ using TravelBooking.Models;
 
 namespace TravelBooking.Controllers;
 
+[Route("api/auth")]
+[ApiController]
 public class AuthController : Controller
 {
     private readonly StoreContext _context;
@@ -26,7 +28,7 @@ public class AuthController : Controller
         _context = context;
     }
 
-    [HttpPost("api/auth/login")]
+    [HttpPost("login")]
     [Consumes("application/x-www-form-urlencoded")]
     public IResult Login()
     {
@@ -67,7 +69,7 @@ public class AuthController : Controller
         return Results.Ok(new { access_token = new JwtSecurityTokenHandler().WriteToken(jwt) });
     }
 
-    [HttpPost("api/auth/register")]
+    [HttpPost("register")]
     [Consumes("application/x-www-form-urlencoded")]
     public IResult RegisterFromAPI([FromForm] AccountRegistration accountRegistration)
     {
@@ -94,14 +96,14 @@ public class AuthController : Controller
         return Results.Ok(account);
     }
 
-    [HttpGet("api/auth/about")]
+    [HttpGet("about")]
     [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public IResult AboutUser()
     {
         return Results.Ok(_context.Accounts.Find(HttpContext.User.GetGuid()));
     }
 
-    [HttpGet("api/auth/logout")]
+    [HttpGet("logout")]
     [Authorize]
     public async Task<IResult> LogoutAsd(string? returnUrl)
     {

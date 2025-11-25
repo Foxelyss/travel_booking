@@ -4,12 +4,21 @@ meta {
   seq: 1
 }
 
-get {
-  url: {{host}}/api/point/login
-  body: none
-  auth: inherit
+post {
+  url: {{host}}/api/booking/book
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:multipart-form {
+  Transporting: 1
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

@@ -3,15 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TravelBooking.DTO;
 
-public class Booking
+public record class Booking(
+ [Required] int? transporting,
+    [Required, MaxLength(256)]
+     string name,
+    [Required, MaxLength(256)]
+     string surname,
+    [Required, MaxLength(12)]
+     string passport,
+         [MaxLength(256)]
+     string? middleName
+)
 {
-    [Required] public required int transporting;
-    [Required, MaxLength(256)]
-    public required string Name;
-    [Required, MaxLength(256)]
-    public required string Surname;
-    [Required, MaxLength(256)]
-    public required string MiddleName;
-    [Required, MaxLength(10)]
-    public required string passport;
+
 }
