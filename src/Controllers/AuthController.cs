@@ -38,8 +38,8 @@ public class AuthController : Controller
         if (!form.ContainsKey("email") || !form.ContainsKey("password"))
             return Results.BadRequest("Email и/или пароль не установлены");
 
-        string email = form["email"];
-        string password = form["password"];
+        string email = form["email"]!;
+        string password = form["password"]!;
 
         var account = _context.Accounts.Where(p => p.Email == email).FirstOrDefault();
 
@@ -105,7 +105,7 @@ public class AuthController : Controller
 
     [HttpGet("logout")]
     [Authorize]
-    public async Task<IResult> LogoutAsd(string? returnUrl)
+    public async Task<IResult> Logout(string? returnUrl)
     {
         var prop = new AuthenticationProperties()
         {

@@ -17,7 +17,7 @@ public class Passenger
     public required string Surname { get; set; }
 
     [MaxLength(32)]
-    public required string Middlename { get; set; }
+    public string? Middlename { get; set; }
 }
 
 
