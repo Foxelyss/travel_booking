@@ -83,7 +83,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IResult EditTransporting(int id, [FromBody] TransportUpdateDto updateDto)
+        public IResult EditTransporting(int id, [FromBody] TransportUpdate updateDto)
         {
             var transport = _context.Transports.Find(id);
             if (transport == null)

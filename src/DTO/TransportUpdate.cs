@@ -1,6 +1,6 @@
 namespace TravelBooking.DTO
 {
-    public class TransportUpdateDto
+    public class TransportUpdate
     {
         public string Name { get; set; }
         public DateTime? Departure { get; set; }
