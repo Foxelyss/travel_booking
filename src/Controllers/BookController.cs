@@ -102,17 +102,31 @@ public class BookController : ControllerBase
     {
         Guid userid = HttpContext.User.GetGuid();
 
-
         var booking = _context.Books.Find(id);
+
         await _orderSemaphore.WaitAsync();
 
-        var transportingObj = _context.Transports.Find(id);
-
-        if (transportingObj == null || booking == null)
+        if (booking == null)
         {
             _orderSemaphore.Release();
 
-            return Results.NotFound();
+            return Results.NotFound($"Booking #{id} not found");
+        }
+
+        if (booking.Status != BookStatus.Cancelled)
+        {
+            _orderSemaphore.Release();
+
+            return Results.NotFound($"Can't cancel the cancelled!");
+        }
+
+        var transportingObj = _context.Transports.Find(booking.TransportationId);
+
+        if (transportingObj == null)
+        {
+            _orderSemaphore.Release();
+
+            return Results.NotFound($"Transport #{id}  not found");
         }
 
         if (booking.AccountId == userid)
