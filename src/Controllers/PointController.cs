@@ -38,10 +38,10 @@ namespace TravelBooking.Controllers
             return Results.Ok(_context.Points.Take(2000));
         }
 
-        public record PointAdd(string name, string region, string city) { };
+
 
         [HttpPost("")]
-        public IResult AddPoint([FromBody] PointAdd pointAdd)
+        public IResult AddPoint([FromBody] PointRegistration pointAdd)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IResult> EditPoint(int id, [FromBody] PointAdd newPointData)
+        public async Task<IResult> EditPoint(int id, [FromBody] PointRegistration newPointData)
         {
             var point = _context.Points.FirstOrDefault(b => b.Id == id);
 
