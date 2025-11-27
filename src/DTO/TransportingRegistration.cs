@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 namespace TravelBooking.DTO;
 
 public record class TransportingRegistration(
-        [Required] string Name,
+        [Required, MaxLength(255)] string Name,
         [Required] int? DeparturePoint,
         [Required] int? ArrivalPoint,
-          [Required] DateTime? Departure,
+        [Required] DateTime? Departure,
         [Required] DateTime? Arrival,
         [Required] int[] TransportingMean,
         [Required] int? Company,

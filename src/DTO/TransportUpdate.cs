@@ -2,7 +2,7 @@ namespace TravelBooking.DTO
 {
     public class TransportUpdate
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public DateTime? Departure { get; set; }
         public DateTime? Arrival { get; set; }
         public int? DeparturePointId { get; set; }
