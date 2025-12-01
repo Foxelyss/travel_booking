@@ -17,6 +17,10 @@ public class StoreContext(DbContextOptions<StoreContext> options) : DbContext(op
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Account>().HasIndex(u => u.Email).IsUnique();
+        modelBuilder.Entity<Account>().HasIndex(u => u.Phone).IsUnique();
+        modelBuilder.Entity<Account>().HasIndex(u => u.Username).IsUnique();
+
         modelBuilder.Entity<TransportingMeans>()
             .HasOne(tm => tm.TransportingMean)
             .WithMany()
