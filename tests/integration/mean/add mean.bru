@@ -18,6 +18,21 @@ script:post-response {
   bru.setVar("latest_mean", res.body.id);
 }
 
+tests {
+  test("Return 200", () => {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Content of Point should be the same", ()=>{
+    expect(res.body).to.include(bru.getVar("mean_creation"));
+  });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
+  
+}
+
 settings {
   encodeUrl: true
   timeout: 0

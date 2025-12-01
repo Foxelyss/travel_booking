@@ -10,6 +10,12 @@ delete {
   auth: inherit
 }
 
+tests {
+  test("Shall return code 200", () => {
+    expect(res.status).to.be.eql(200);
+  });
+}
+
 settings {
   encodeUrl: true
   timeout: 0

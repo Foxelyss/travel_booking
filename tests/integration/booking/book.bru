@@ -5,9 +5,13 @@ meta {
 }
 
 post {
-  url: {{host}}/api/point/login
+  url: {{host}}/api/booking/book
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
 }
 
 settings {

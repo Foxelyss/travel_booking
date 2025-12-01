@@ -5,9 +5,20 @@ meta {
 }
 
 post {
-  url: {{host}}/api/auth/login
-  body: none
+  url: {{host}}/api/auth/register
+  body: formUrlEncoded
   auth: inherit
+}
+
+body:form-urlencoded {
+  email: asd@asd.com
+  phone: 8800
+  password: 123
+}
+
+body:multipart-form {
+  email: asd@asd.com
+  password: 123
 }
 
 tests {

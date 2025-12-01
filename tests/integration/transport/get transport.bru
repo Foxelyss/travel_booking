@@ -19,8 +19,12 @@ body:multipart-form {
 }
 
 tests {
+  test("Return 200", () => {
+    expect(res.status).to.equal(200);
+  });
+  
   test("Content of Point should be the same", ()=>{
-    expect(res.body).to.include(bru.getVar("mean_change_result"));
+    expect(res.body).to.include(bru.getVar("transport_creation"));
   });
   
   test("Content type is JSON", () => {

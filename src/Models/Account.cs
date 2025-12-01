@@ -18,6 +18,6 @@ public class Account
     [Required, MaxLength(255)]
     public required string PasswordHash { get; set; }
 
-    [MaxLength(256)]
+    [MaxLength(255)]
     public string? Username { get; set; }
 }

@@ -1,5 +1,8 @@
 [
     {
+        "account_email": "123@asd.com",
+        "account_password": "123",
+        "account_phone": "123",
         "point_creation": {
             "name": "Волгоград",
             "city": "Волгоград",
@@ -38,6 +41,23 @@
                 2
             ]
         },
+        "transport_change": {
+            "Name": "Поезд Волгоград-Казань 123"
+        },
+        "transport_change_result": {
+            "Name": "Поезд Волгоград-Казань",
+            "Price": 13123.10,
+            "Company": 1,
+            "Arrival": "2012-12-31T22:00:00.000Z",
+            "Departure": "2012-12-31T22:00:00.000Z",
+            "PlaceCount": 132,
+            "ArrivalPoint": 1,
+            "DeparturePoint": 2,
+            "TransportingMean": [
+                1,
+                2
+            ]
+        },
         "company_creation": {
             "name": "Контора Тест",
             "phone": "123123312",
@@ -55,6 +75,11 @@
             "phone": "123123312",
             "address": "asdasd",
             "INN": "asd"
-        }
+        },
+        "booking_name": "Test",
+        "booking_surname": "test",
+        "booking_middleName": null,
+        "booking_passport": "1231 223123",
+        "booking_transporting": 1
     }
 ]

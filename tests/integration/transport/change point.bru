@@ -5,9 +5,17 @@ meta {
 }
 
 patch {
-  url: {{host}}/api/point/login
-  body: none
+  url: {{host}}/api/transport/:id
+  body: json
   auth: inherit
+}
+
+params:path {
+  id: {{latest_transport}}
+}
+
+body:json {
+  {{transport_change}}
 }
 
 settings {

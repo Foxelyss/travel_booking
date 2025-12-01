@@ -16,12 +16,11 @@ namespace TravelBooking.Controllers;
 public class BookController : ControllerBase
 {
     private readonly StoreContext _context;
-    private static readonly SemaphoreSlim _orderSemaphore = new SemaphoreSlim(0, 1);
+    private static readonly SemaphoreSlim _orderSemaphore = new SemaphoreSlim(1, 1);
 
     public BookController(StoreContext context)
     {
         _context = context;
-        _orderSemaphore.Release(1);
     }
 
     [HttpGet("bookings")]
@@ -44,6 +43,11 @@ public class BookController : ControllerBase
         if (!ModelState.IsValid)
         {
             return Results.BadRequest(ModelState);
+        }
+
+        if (!booking.passport.Remove(' ').All(c => c >= '0' && c <= '9'))
+        {
+            return Results.BadRequest("Passport invalid");
         }
 
         Guid id = HttpContext.User.GetGuid();

@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Data;
+using TravelBooking.DTO;
 using TravelBooking.Models;
 
 namespace TravelBooking.Controllers
@@ -57,10 +58,9 @@ namespace TravelBooking.Controllers
             return Results.Ok(mean);
         }
 
-        public record class TransportingMeanEdit([MaxLength(128)] string name) { };
 
         [HttpPatch("{id}")]
-        public IResult EditMean(int id, [FromBody] TransportingMeanEdit transportingMeanEdit)
+        public IResult EditMean(int id, [FromBody] TransportingMeanPatch transportingMeanEdit)
         {
             if (!ModelState.IsValid)
             {

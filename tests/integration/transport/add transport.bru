@@ -11,17 +11,7 @@ post {
 }
 
 body:json {
-  {
-    "Name":"Поезд Волгоград-Казань",
-    "Price":13123.10,
-    "Company":1,
-    "Arrival":"2012-12-31T22:00:00.000Z",
-    "Departure":"2012-12-31T22:00:00.000Z",
-    "PlaceCount":132,
-    "ArrivalPoint":1,
-    "DeparturePoint":2,
-    "TransportingMean":[1,2]
-  }
+  {{transport_creation}}
 }
 
 body:multipart-form {
@@ -30,6 +20,21 @@ body:multipart-form {
 
 script:post-response {
   bru.setVar("latest_transport", res.body.id);
+}
+
+tests {
+  test("Return 200", () => {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Content of Point should be the same", ()=>{
+    expect(res.body).to.include(bru.getVar("transport_creation"));
+  });
+  
+  test("Content type is JSON", () => {
+    expect(res.getHeader("content-type")).to.contain("application/json");
+  });
+  
 }
 
 settings {
