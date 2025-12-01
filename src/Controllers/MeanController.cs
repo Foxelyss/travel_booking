@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBooking.Data;
@@ -20,6 +21,11 @@ namespace TravelBooking.Controllers
         [HttpPost("")]
         public IResult AddMean([FromBody] TransportingMean mean)
         {
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
             var transportingMean = new TransportingMean { Name = mean.Name };
             _context.TransportMeans.Add(transportingMean);
             _context.SaveChanges();
@@ -51,11 +57,16 @@ namespace TravelBooking.Controllers
             return Results.Ok(mean);
         }
 
-        public record TransportingMeanEdit(string name) { };
+        public record class TransportingMeanEdit([MaxLength(128)] string name) { };
 
         [HttpPatch("{id}")]
         public IResult EditMean(int id, [FromBody] TransportingMeanEdit transportingMeanEdit)
         {
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
             var mean = _context.TransportMeans.FirstOrDefault(b => b.Id == id);
 
             if (mean == null) { return Results.NotFound(); }

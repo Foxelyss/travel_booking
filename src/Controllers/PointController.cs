@@ -19,19 +19,6 @@ namespace TravelBooking.Controllers
             _context = context;
         }
 
-
-        [HttpGet("name/{name}")]
-        public Point searchForPoint(string name = "Томск")
-        {
-            return (Point)_context.Points.Where(p => EF.Functions.Like(p.Name, $"%{name}%")).Take(1);
-        }
-
-        [HttpGet("search/{name}")]
-        public IEnumerable<Point> searchForPoints(string name)
-        {
-            return _context.Points.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{name}%".ToLower()));
-        }
-
         [HttpGet("all")]
         public IResult GetPoints()
         {
@@ -67,8 +54,13 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IResult> EditPoint(int id, [FromBody] PointRegistration newPointData)
+        public async Task<IResult> EditPoint(int id, [FromBody] PointPatch newPointData)
         {
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
             var point = _context.Points.FirstOrDefault(b => b.Id == id);
 
             if (point == null) { return Results.NotFound(); }

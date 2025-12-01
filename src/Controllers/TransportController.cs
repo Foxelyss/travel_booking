@@ -63,7 +63,7 @@ namespace TravelBooking.Controllers
 
             _context.SaveChanges();
 
-            _context.TransportingMeans.AddRange(registration.TransportingMean.Distinct().ToArray().Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
+            _context.TransportingMeans.AddRange(registration.TransportingMean.Distinct().Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
             _context.SaveChanges();
 
             return Results.Ok();
@@ -106,29 +106,11 @@ namespace TravelBooking.Controllers
             if (updateDto.PlaceCount.HasValue)
             {
                 transport.PlaceCount = updateDto.PlaceCount.Value;
-                transport.FreePlaceCount = updateDto.PlaceCount.Value;
+                transport.FreePlaceCount = updateDto.PlaceCount.Value - (transport.PlaceCount - transport.FreePlaceCount);
             }
 
             _context.SaveChanges();
             return Results.Ok(transport);
-        }
-
-
-        [HttpDelete("{id}")]
-        public IResult RemoveTransporting(int id)
-        {
-            Transport? point = _context.Transports.Find(id);
-
-            if (point == null)
-            {
-                return Results.NotFound();
-            }
-
-            _context.Transports.Attach(point);
-            _context.Transports.Remove(point);
-
-            _context.SaveChanges();
-            return Results.Ok();
         }
     }
 }

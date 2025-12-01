@@ -15,8 +15,7 @@ public class Account
     [Required, MaxLength(128)]
     public required string Email { get; set; }
 
-    [Required]
-    [MaxLength(255)]
+    [Required, MaxLength(255)]
     public required string PasswordHash { get; set; }
 
     [MaxLength(256)]

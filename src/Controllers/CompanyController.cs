@@ -21,6 +21,11 @@ namespace TravelBooking.Controllers
         [Consumes("application/json")]
         public IResult AddCompany(CompanyRegistration companyRegistration)
         {
+            if (!ModelState.IsValid)
+            {
+                return Results.BadRequest(ModelState);
+            }
+
             var company = new Company
             {
                 Name = companyRegistration.name,
@@ -51,12 +56,12 @@ namespace TravelBooking.Controllers
         [HttpPatch("{id}")]
         public IResult EditCompany(int id, [FromBody] CompanyPatch companyPatch)
         {
-            var company = _context.Companies.SingleOrDefault(c => c.Id == id);
-
             if (!ModelState.IsValid)
             {
                 return Results.BadRequest(ModelState);
             }
+
+            var company = _context.Companies.SingleOrDefault(c => c.Id == id);
 
             if (company == null)
             {

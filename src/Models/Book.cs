@@ -10,8 +10,7 @@ public class Book
 
     public required int PassengerId { get; set; }
 
-    [Required]
-    [MaxLength(128)]
+    [Required, MaxLength(128)]
     public required string Payment { get; set; }
 
     [Required]

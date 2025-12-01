@@ -12,8 +12,5 @@ public record class TransportingRegistration(
         [Required] int? Company,
         [Required] decimal? Price,
         [Required] uint? PlaceCount,
-         uint FreePlaceCount
-               )
-{
-
-}
+         uint FreePlaceCount)
+{ }
