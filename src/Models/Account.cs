@@ -9,7 +9,7 @@ public class Account
     [Key]
     public Guid Id { get; set; }
 
-    [Required, Phone]
+    [Required, Phone, MaxLength(128)]
     public required string Phone { get; set; }
 
     [Required, MaxLength(128)]

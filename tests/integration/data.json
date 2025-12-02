@@ -2,16 +2,19 @@
     {
         "account_email": "123@asd.com",
         "account_password": "123",
-        "account_phone": "123",
+        "account_phone": "8800",
+        "account_check": {
+            "phone": "8800",
+            "email": "123@asd.com",
+            "username": "123@asd.com"
+        },
         "point_creation": {
             "name": "Волгоград",
             "city": "Волгоград",
             "region": "Волгоградская область"
         },
         "point_change": {
-            "name": "Владивосток",
-            "city": "Волгоград",
-            "region": "Волгоградская область"
+            "name": "Владивосток"
         },
         "point_change_result": {
             "name": "Владивосток",
