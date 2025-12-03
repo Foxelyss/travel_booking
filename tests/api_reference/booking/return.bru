@@ -4,12 +4,21 @@ meta {
   seq: 2
 }
 
-get {
-  url: {{host}}/api/point/login
-  body: none
-  auth: inherit
+post {
+  url: {{host}}/api/booking/return
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:form-urlencoded {
+  id: 2
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

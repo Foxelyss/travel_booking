@@ -20,9 +20,6 @@ builder.Services.AddOpenApiDocument(document =>
     document.Title = "Агрегатор";
 });
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/login");
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -44,6 +41,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
         };
     });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/login");
+
 builder.Services.AddAuthorization();
 builder.Services.AddRazorPages();
 
@@ -111,7 +112,7 @@ public class AuthOptions
 {
     public const string ISSUER = "MyAuthServer"; // издатель токена
     public const string AUDIENCE = "MyAuthClient"; // потребитель токена
-    const string KEY = "mysupersecret_secretsecretsecretkey!123";   // ключ для шифрации
+    const string KEY = "mysup2rsecret_secrets5cretsecretkey!123";   // ключ для шифрации
     public static SymmetricSecurityKey GetSymmetricSecurityKey() =>
         new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
 }

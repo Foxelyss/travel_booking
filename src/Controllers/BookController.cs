@@ -25,14 +25,39 @@ public class BookController : ControllerBase
 
     [HttpGet("bookings")]
     [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
-    public IEnumerable<Book> GetTicketsForUser()
+    public IEnumerable<Object> GetTicketsForUser()
     {
         Guid id = HttpContext.User.GetGuid();
 
         return _context.Books
             .Include(x => x.Account)
+            .Where(x => x.Account!.Id == id)
             .Include(x => x.Transportation)
-            .Where(x => x.Account!.Id == id);
+            .Include(point_a => point_a.Transportation!.DeparturePoint)
+            .Include(point_b => point_b.Transportation!.ArrivalPoint)
+            .Include(means => means.Transportation!.TransportingMeans)
+            .Select(o => new
+            {
+                Id = o.Id,
+                Transportation = new
+                {
+                    Id = o.Transportation!.Id,
+                    Name = o.Transportation!.Name,
+                    Arrival = o.Transportation!.Arrival,
+                    ArrivalPoint = o.Transportation!.ArrivalPoint,
+                    Departure = o.Transportation!.Departure,
+                    DeparturePoint = o.Transportation!.DeparturePoint,
+                    TransportingMeans = o.Transportation!.TransportingMeans,
+                    PlaceCount = o.Transportation!.PlaceCount,
+                    FreePlaceCount = o.Transportation!.FreePlaceCount,
+                    CompanyName = o.Transportation!.Company!.Name,
+                },
+                BookingDate = o.BookingDate,
+                Price = o.Price,
+                Payment = o.Payment,
+                StatusId = (int)o.Status,
+                Status = o.Status.ToString()
+            });
     }
 
     [HttpPost("book")]
@@ -45,7 +70,7 @@ public class BookController : ControllerBase
             return Results.BadRequest(ModelState);
         }
 
-        if (!booking.passport.Remove(' ').All(c => c >= '0' && c <= '9'))
+        if (!booking.passport.Replace(" ", string.Empty).All(c => c >= '0' && c <= '9'))
         {
             return Results.BadRequest("Passport invalid");
         }
@@ -86,6 +111,7 @@ public class BookController : ControllerBase
         };
 
         _context.Passengers.Add(passenger);
+        await _context.SaveChangesAsync();
 
         var booking_c = new Book
         {
@@ -95,14 +121,18 @@ public class BookController : ControllerBase
             PassengerId = passenger.Id,
             TransportationId = booking.transporting.GetValueOrDefault()
         };
+
         _context.Books.Add(booking_c);
+        await _context.SaveChangesAsync();
 
         return Results.Ok();
     }
+    public record class Return([Required] long? id);
 
-    [Authorize]
     [HttpPost("return")]
-    public async Task<IResult> ReturnTicket([FromForm] long id)
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
+    [Consumes("application/x-www-form-urlencoded")]
+    public async Task<IResult> ReturnTicket([FromForm] int id)
     {
         Guid userid = HttpContext.User.GetGuid();
 
@@ -117,7 +147,7 @@ public class BookController : ControllerBase
             return Results.NotFound($"Booking #{id} not found");
         }
 
-        if (booking.Status != BookStatus.Cancelled)
+        if (booking.Status == BookStatus.Cancelled)
         {
             _orderSemaphore.Release();
 
@@ -130,10 +160,10 @@ public class BookController : ControllerBase
         {
             _orderSemaphore.Release();
 
-            return Results.NotFound($"Transport #{id}  not found");
+            return Results.NotFound($"Transport #{booking.TransportationId}  not found");
         }
 
-        if (booking.AccountId == userid)
+        if (booking.AccountId != userid)
         {
             _orderSemaphore.Release();
 
