@@ -77,7 +77,7 @@ app.MapControllerRoute(
 name: "point",
 pattern: "{controller=Point}/{action=Index}/{id?}");
 
-
+app.MapGet("api/health", () => Results.Ok());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
