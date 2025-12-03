@@ -28,7 +28,7 @@ services:
       - "traefik.http.middlewares.travel-backend-headers.headers.accesscontrolallowheaders=*"
       - "traefik.http.middlewares.travel-backend-headers.headers.accesscontrolalloworiginlist=https://travel.foxelyss.ru"
       - "traefik.http.middlewares.travel-backend-headers.headers.addvaryheader=true"
-      - "traefik.http.middlewares.travel-backend-headers.headers.customResponseHeaders.Access-Control-Allow-Origin=`https://travel.foxelyss.ru`"
+      - "traefik.http.middlewares.travel-backend-headers.headers.customResponseHeaders.Access-Control-Allow-Origin=https://travel.foxelyss.ru"
 
     networks:
       - travel
