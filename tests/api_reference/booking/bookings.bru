@@ -4,10 +4,14 @@ meta {
   seq: 3
 }
 
-post {
-  url: {{host}}/api/point/login
+get {
+  url: {{host}}/api/booking/bookings
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
 }
 
 settings {
