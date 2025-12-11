@@ -110,8 +110,8 @@ app.Run();
 
 public class AuthOptions
 {
-    public const string ISSUER = "MyAuthServer"; // издатель токена
-    public const string AUDIENCE = "MyAuthClient"; // потребитель токена
+    public const string ISSUER = "Foxelyss"; // издатель токена
+    public const string AUDIENCE = "TravelBooking"; // потребитель токена
     const string KEY = "mysup2rsecret_secrets5cretsecretkey!123";   // ключ для шифрации
     public static SymmetricSecurityKey GetSymmetricSecurityKey() =>
         new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));

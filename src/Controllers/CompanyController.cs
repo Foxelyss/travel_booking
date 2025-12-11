@@ -19,6 +19,7 @@ namespace TravelBooking.Controllers
 
         [HttpPost("")]
         [Consumes("application/json")]
+        [Produces<Company>]
         public IResult AddCompany(CompanyRegistration companyRegistration)
         {
             if (!ModelState.IsValid)
@@ -41,6 +42,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces<Company>]
         public IResult GetCompany(int id)
         {
             var company = _context.Companies.SingleOrDefault(c => c.Id == id);
@@ -54,6 +56,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Produces<Company>]
         public IResult EditCompany(int id, [FromBody] CompanyPatch companyPatch)
         {
             if (!ModelState.IsValid)

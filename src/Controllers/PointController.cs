@@ -20,14 +20,15 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("all")]
+        [Produces<ICollection<Point>>]
         public IResult GetPoints()
         {
             return Results.Ok(_context.Points.Take(2000));
         }
 
 
-
         [HttpPost("")]
+        [Produces<Point>]
         public IResult AddPoint([FromBody] PointRegistration pointAdd)
         {
             if (!ModelState.IsValid)
@@ -44,6 +45,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces<Point>]
         public IResult GetPoint(int id)
         {
             var point = _context.Points.FirstOrDefault(b => b.Id == id);
@@ -54,6 +56,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Produces<Point>]
         public async Task<IResult> EditPoint(int id, [FromBody] PointPatch newPointData)
         {
             if (!ModelState.IsValid)

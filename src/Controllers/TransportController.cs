@@ -19,6 +19,7 @@ namespace TravelBooking.Controllers
 
         [HttpPost]
         [Consumes("application/json")]
+        [Produces<Transport>]
         public IResult AddTransporting([FromBody] TransportingRegistration registration)
         {
             if (!ModelState.IsValid)
@@ -70,6 +71,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces<Transport>]
         public IResult GetTransporting(int id)
         {
             var transporting = _context.Transports.Find(id);
@@ -83,6 +85,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Produces<Transport>]
         public IResult EditTransporting(int id, [FromBody] TransportUpdate updateDto)
         {
             var transport = _context.Transports.Find(id);

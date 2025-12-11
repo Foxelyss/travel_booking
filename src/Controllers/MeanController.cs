@@ -20,6 +20,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpPost("")]
+        [Produces<TransportingMean>]
         public IResult AddMean([FromBody] TransportingMean mean)
         {
             if (!ModelState.IsValid)
@@ -35,6 +36,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces<TransportingMean>]
         public IResult GetMean(int id)
         {
             var mean = _context.TransportMeans.FirstOrDefault(b => b.Id == id);
@@ -46,6 +48,7 @@ namespace TravelBooking.Controllers
         }
 
         [HttpGet("all")]
+        [Produces<TransportingMean>]
         public IResult GetAllMeans()
         {
             var mean = _context.TransportMeans.Take(100);
@@ -60,6 +63,7 @@ namespace TravelBooking.Controllers
 
 
         [HttpPatch("{id}")]
+        [Produces<TransportingMean>]
         public IResult EditMean(int id, [FromBody] TransportingMeanPatch transportingMeanEdit)
         {
             if (!ModelState.IsValid)
