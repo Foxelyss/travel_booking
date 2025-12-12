@@ -249,5 +249,89 @@
         "booking_middleName": "ФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФ",
         "booking_passport": "123456789012",
         "booking_transporting": 2
+    },
+    {
+        "account_email": "edit@test.com",
+        "account_password": "123456",
+        "account_phone": "78889997766",
+        "account_check": {
+            "phone": "79995553311",
+            "email": "edit@test.com",
+            "username": "ИмяПользователя"
+        },
+        "point_creation": {
+            "name": "Ижевск",
+            "city": "Ижевск",
+            "region": "Удмуртия"
+        },
+        "point_change": {
+            "region": "Удмуртская Республика",
+            "city": "Сарапул"
+        },
+        "point_change_result": {
+            "name": "Ижевск",
+            "city": "Сарапул",
+            "region": "Удмуртская Республика"
+        },
+        "mean_creation": {
+            "name": "Троллейбус"
+        },
+        "mean_change": {
+            "name": "Троллейбус №7"
+        },
+        "mean_change_result": {
+            "name": "Троллейбус №7"
+        },
+        "transport_creation": {
+            "Name": "Аэроэкспресс Казань-Аэропорт",
+            "Price": 550,
+            "Company": 3,
+            "Arrival": "2025-03-01T09:00:00Z",
+            "Departure": "2025-03-01T08:30:00Z",
+            "PlaceCount": 80,
+            "ArrivalPoint": 5,
+            "DeparturePoint": 6,
+            "TransportingMean": [
+                4
+            ]
+        },
+        "transport_change": {
+            "ArrivalPoint": 7,
+            "DeparturePoint": 8
+        },
+        "transport_change_result": {
+            "Name": "Аэроэкспресс Казань-Аэропорт",
+            "Price": 550,
+            "Company": 3,
+            "Arrival": "2025-03-01T09:00:00Z",
+            "Departure": "2025-03-01T08:30:00Z",
+            "PlaceCount": 80,
+            "ArrivalPoint": 7,
+            "DeparturePoint": 8,
+            "TransportingMean": [
+                4
+            ]
+        },
+        "company_creation": {
+            "name": "Транспорт Плюс",
+            "phone": "89992223344",
+            "address": "ул. Механизаторов, 19",
+            "INN": "111222333"
+        },
+        "company_change": {
+            "phone": "80000000000",
+            "address": "ул. Комбайнёров, 88"
+        },
+        "company_result": {
+            "name": "Транспорт Плюс",
+            "phone": "80000000000",
+            "address": "ул. Комбайнёров, 88",
+            "INN": "111222333"
+        },
+        "booking_name": "Сергей",
+        "booking_surname": "Иванов",
+        "booking_middleName": "Петрович",
+        "booking_passport": "987654321000",
+        "booking_transporting": 3
     }
 ]

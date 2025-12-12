@@ -83,6 +83,9 @@ jobs:
       
       - name: Create reports directory
         run: mkdir -p reports
+
+      - name: Seed tests
+        run: node tests/seed.js
       
       - name: Run Bruno tests
         env:
