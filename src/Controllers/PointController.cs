@@ -68,9 +68,9 @@ namespace TravelBooking.Controllers
 
             if (point == null) { return Results.NotFound(); }
 
-            point.Name = newPointData.name;
-            point.Region = newPointData.region;
-            point.City = newPointData.city;
+            point.Name = newPointData.name ?? point.Name;
+            point.Region = newPointData.region ?? point.Region;
+            point.City = newPointData.city ?? point.City;
 
             await _context.SaveChangesAsync();
 
