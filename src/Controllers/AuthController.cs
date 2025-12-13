@@ -98,7 +98,7 @@ public class AuthController : Controller
             _context.SaveChanges();
             return Results.Ok(account);
         }
-        catch (DbUpdateException exc)
+        catch (DbUpdateException)
         {
             return Results.Conflict();
         }
@@ -106,7 +106,7 @@ public class AuthController : Controller
     }
 
     [HttpGet("about")]
-    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
+    [Authorize()]
     public IResult AboutUser()
     {
         return Results.Ok(_context.Accounts.Find(HttpContext.User.GetGuid()));

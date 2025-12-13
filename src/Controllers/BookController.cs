@@ -24,7 +24,7 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("bookings")]
-    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
+    [Authorize()]
     public IEnumerable<Object> GetTicketsForUser()
     {
         Guid id = HttpContext.User.GetGuid();
@@ -61,7 +61,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost("book")]
-    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
+    [Authorize()]
     [Consumes("application/x-www-form-urlencoded")]
     public async Task<IResult> Book([FromForm] Booking booking)
     {
@@ -130,7 +130,7 @@ public class BookController : ControllerBase
     public record class Return([Required] long? id);
 
     [HttpPost("return")]
-    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
+    [Authorize()]
     [Consumes("application/x-www-form-urlencoded")]
     public async Task<IResult> ReturnTicket([FromForm] int id)
     {
