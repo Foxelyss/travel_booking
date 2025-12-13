@@ -7,7 +7,7 @@ public class Book
 {
     [Key]
     public int Id { get; set; }
-
+    [Required]
     public required int PassengerId { get; set; }
 
     [Required, MaxLength(128)]
@@ -15,14 +15,14 @@ public class Book
 
     [Required]
     public required decimal Price { get; set; }
-
+    [Required]
     public required int TransportationId { get; set; }
 
     public virtual Passenger? Passenger { get; set; }
     public virtual Transport? Transportation { get; set; }
 
     public BookStatus Status { get; set; } = BookStatus.Upcoming;
-
+    [Required]
     public required Guid AccountId { get; set; }
     public virtual Account? Account { get; set; }
 

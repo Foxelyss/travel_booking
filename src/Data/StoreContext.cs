@@ -63,8 +63,8 @@ public class StoreContext(DbContextOptions<StoreContext> options) : DbContext(op
 
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Account)
-            .WithOne()
-            .HasForeignKey<Book>(b => b.AccountId);
+            .WithMany()
+            .HasForeignKey(b => b.AccountId);
 
         base.OnModelCreating(modelBuilder);
     }
