@@ -67,7 +67,7 @@ namespace TravelBooking.Controllers
             _context.TransportingMeans.AddRange(registration.TransportingMean.Distinct().Select(id => new TransportingMeans { TransportationId = obj.Entity.Id, TransportingMeanId = id }));
             _context.SaveChanges();
 
-            return Results.Ok();
+            return Results.Ok(obj.Entity);
         }
 
         [HttpGet("{id}")]

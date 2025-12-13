@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using TravelBooking.Data;
 using TravelBooking.DTO;
 using TravelBooking.Models;
@@ -90,10 +92,17 @@ public class AuthController : Controller
             Phone = accountRegistration.phone,
             Username = accountRegistration.username ?? accountRegistration.email
         };
-        _context.Accounts.Add(account);
+        try
+        {
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
+            return Results.Ok(account);
+        }
+        catch (DbUpdateException exc)
+        {
+            return Results.Conflict();
+        }
 
-        _context.SaveChanges();
-        return Results.Ok(account);
     }
 
     [HttpGet("about")]
