@@ -1,22 +1,22 @@
 meta {
-  name: get mean copy
+  name: get changed company
   type: http
   seq: 4
 }
 
 get {
-  url: {{host}}/api/mean/:id
+  url: {{host}}/api/company/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: {{latest_mean}}
+  id: {{latest_company}}
 }
 
 tests {
   test("Content of Point should be the same", ()=>{
-    expect(res.body).to.include(bru.getVar("mean_change_result"));
+    expect(res.body).to.include(bru.getVar("company_change_result"));
   });
   
   test("Content type is JSON", () => {

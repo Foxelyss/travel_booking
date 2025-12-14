@@ -1,30 +1,22 @@
 meta {
-  name: get transport copy
+  name: get changed mean
   type: http
   seq: 4
 }
 
 get {
-  url: {{host}}/api/transport/:id
+  url: {{host}}/api/mean/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: {{latest_transport}}
-}
-
-body:multipart-form {
-  asfd: 
+  id: {{latest_mean}}
 }
 
 tests {
-  test("Return 200", () => {
-    expect(res.status).to.equal(200);
-  });
-  
   test("Content of Point should be the same", ()=>{
-    expect(res.body).to.include(bru.getVar("transport_change_result"));
+    expect(res.body).to.include(bru.getVar("mean_change_result"));
   });
   
   test("Content type is JSON", () => {

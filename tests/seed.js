@@ -6,12 +6,12 @@ var requests = [];
 
 let points = [
     { city: 'г. Казань', region: 'Казанская область', name: 'Казань' },
-    { city: 'г. Севастополь', region: 'Севастополь', name: 'Севастополь' }
+    { city: 'г. Волгоград', region: 'Волгоградская область', name: 'Волгоград' }
 ];
 
 
 for (let point of points) {
-    const response = fetch(server + "/api/point/", {
+    const response = await fetch(server + "/api/point/", {
         "credentials": "omit",
         "headers": {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0",
@@ -28,8 +28,6 @@ for (let point of points) {
         "body": JSON.stringify(point),
         "method": "POST",
         "mode": "cors"
-    }).then(function (response) {
-        return response.json();
     });
 
     requests.push(response);
@@ -41,7 +39,7 @@ let companies = [
 ];
 
 for (let company of companies) {
-    const response = fetch(server + "/api/company", {
+    const response = await fetch(server + "/api/company", {
         "credentials": "omit",
         "headers": {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0",
@@ -58,11 +56,7 @@ for (let company of companies) {
         "body": JSON.stringify(company),
         "method": "POST",
         "mode": "cors"
-    }).then(function (response) {
-        return response.json();
     });
-
-    requests.push(response);
 }
 
 
@@ -72,7 +66,7 @@ let means = [
 ];
 
 for (let mean of means) {
-    const response = fetch(server + "/api/mean", {
+    const response = await fetch(server + "/api/mean", {
         "credentials": "omit",
         "headers": {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0",
@@ -89,11 +83,7 @@ for (let mean of means) {
         "body": JSON.stringify(mean),
         "method": "POST",
         "mode": "cors"
-    }).then(function (response) {
-        return response.json();
     });
-
-    requests.push(response);
 }
 
 

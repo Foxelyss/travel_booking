@@ -1,23 +1,17 @@
 meta {
-  name: get mean copy copy
+  name: get deleted company
   type: http
   seq: 6
 }
 
 get {
-  url: {{host}}/api/mean/:id
-  body: json
+  url: {{host}}/api/company/:id
+  body: none
   auth: inherit
 }
 
 params:path {
-  id: {{latest_mean}}
-}
-
-body:json {
-  {
-    "name": "asdfas"
-  }
+  id: {{latest_company}}
 }
 
 tests {
