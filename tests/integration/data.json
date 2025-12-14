@@ -31,35 +31,58 @@
             "name": "Автобусом"
         },
         "transport_creation": {
-            "Name": "Поезд Волгоград-Казань",
-            "Price": 13123.10,
-            "Company": 1,
-            "Arrival": "2012-12-31T22:00:00.000Z",
-            "Departure": "2012-12-31T22:00:00.000Z",
-            "PlaceCount": 132,
-            "ArrivalPoint": 1,
-            "DeparturePoint": 2,
-            "TransportingMean": [
-                1,
-                2
+            "name": "Поезд Волгоград-Казань",
+            "departure": "2012-12-31T22:00:00Z",
+            "arrival": "2012-12-31T22:00:00Z",
+            "departurePointId": 2,
+            "arrivalPointId": 1,
+            "companyId": 1,
+            "price": 13123.1,
+            "placeCount": 132,
+            "freeplaceCount": 132,
+            "departurePoint": {
+                "id": 2,
+                "name": "Волгоград",
+                "region": "Волгоградская область",
+                "city": "г. Волгоград"
+            },
+            "arrivalPoint": {
+                "id": 1,
+                "name": "Казань",
+                "region": "Казанская область",
+                "city": "г. Казань"
+            },
+            "company": {
+                "id": 1,
+                "name": "ООО Лана",
+                "inn": "123123",
+                "registrationAddress": "г. Томск",
+                "phone": "8 963 312 75 66"
+            },
+            "companyName": null,
+            "transportingMeans": [
+                {
+                    "id": 1,
+                    "name": "Ж/Д"
+                },
+                {
+                    "id": 2,
+                    "name": "Автобусом"
+                }
             ]
         },
         "transport_change": {
-            "Name": "Поезд Волгоград-Казань 123"
+            "name": "Поезд Волгоград-Казань 123"
         },
         "transport_change_result": {
-            "Name": "Поезд Волгоград-Казань",
-            "Price": 13123.10,
-            "Company": 1,
-            "Arrival": "2012-12-31T22:00:00.000Z",
-            "Departure": "2012-12-31T22:00:00.000Z",
-            "PlaceCount": 132,
-            "ArrivalPoint": 1,
-            "DeparturePoint": 2,
-            "TransportingMean": [
-                1,
-                2
-            ]
+            "name": "Поезд Волгоград-Казань",
+            "price": 13123.10,
+            "company": 1,
+            "arrival": "2012-12-31T22:00:00.000Z",
+            "departure": "2012-12-31T22:00:00.000Z",
+            "placeCount": 132,
+            "arrivalPoint": 1,
+            "departurePoint": 2
         },
         "company_creation": {
             "name": "Контора Тест",
@@ -118,14 +141,14 @@
         },
         "transport_creation": {
             "Name": "Т",
-            "Price": 0.01,
-            "Company": 2,
-            "Arrival": "2025-12-31T23:59:59.000Z",
-            "Departure": "2025-12-31T00:00:00.000Z",
-            "PlaceCount": 1,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
-            "TransportingMean": [
+            "price": 0.01,
+            "company": 2,
+            "arrival": "2025-12-31T23:59:59.000Z",
+            "departure": "2025-12-31T00:00:00.000Z",
+            "placeCount": 1,
+            "arrivalPoint": 3,
+            "departurePoint": 4,
+            "transportingMean": [
                 3
             ]
         },
@@ -134,14 +157,14 @@
         },
         "transport_change_result": {
             "Name": "Т",
-            "Price": 0.01,
-            "Company": 2,
-            "Arrival": "2025-12-31T23:59:59.000Z",
-            "Departure": "2025-12-31T00:00:00.000Z",
-            "PlaceCount": 1,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
-            "TransportingMean": [
+            "price": 0.01,
+            "company": 2,
+            "arrival": "2025-12-31T23:59:59.000Z",
+            "departure": "2025-12-31T00:00:00.000Z",
+            "placeCount": 1,
+            "arrivalPoint": 3,
+            "departurePoint": 4,
+            "transportingMean": [
                 3
             ]
         },
@@ -202,30 +225,30 @@
         },
         "transport_creation": {
             "Name": "Поезд Москва-Казань",
-            "Price": 15000.55,
-            "Company": 2,
-            "Arrival": "2025-02-01T12:00:00Z",
-            "Departure": "2025-02-01T03:00:00Z",
-            "PlaceCount": 300,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
-            "TransportingMean": [
+            "price": 15000.55,
+            "company": 2,
+            "arrival": "2025-02-01T12:00:00Z",
+            "departure": "2025-02-01T03:00:00Z",
+            "placeCount": 300,
+            "arrivalPoint": 3,
+            "departurePoint": 4,
+            "transportingMean": [
                 3
             ]
         },
         "transport_change": {
-            "Price": 15000.55
+            "price": 15000.55
         },
         "transport_change_result": {
             "Name": "Поезд Москва-Казань",
-            "Price": 15000.55,
-            "Company": 2,
-            "Arrival": "2025-02-01T12:00:00Z",
-            "Departure": "2025-02-01T03:00:00Z",
-            "PlaceCount": 300,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
-            "TransportingMean": [
+            "price": 15000.55,
+            "company": 2,
+            "arrival": "2025-02-01T12:00:00Z",
+            "departure": "2025-02-01T03:00:00Z",
+            "placeCount": 300,
+            "arrivalPoint": 3,
+            "departurePoint": 4,
+            "transportingMean": [
                 3
             ]
         },
@@ -284,31 +307,31 @@
         },
         "transport_creation": {
             "Name": "Аэроэкспресс Казань-Аэропорт",
-            "Price": 550,
-            "Company": 3,
-            "Arrival": "2025-03-01T09:00:00Z",
-            "Departure": "2025-03-01T08:30:00Z",
-            "PlaceCount": 80,
-            "ArrivalPoint": 5,
-            "DeparturePoint": 6,
-            "TransportingMean": [
+            "price": 550,
+            "company": 3,
+            "arrival": "2025-03-01T09:00:00Z",
+            "departure": "2025-03-01T08:30:00Z",
+            "placeCount": 80,
+            "arrivalPoint": 5,
+            "departurePoint": 6,
+            "transportingMean": [
                 4
             ]
         },
         "transport_change": {
-            "ArrivalPoint": 7,
-            "DeparturePoint": 8
+            "arrivalPoint": 7,
+            "departurePoint": 8
         },
         "transport_change_result": {
             "Name": "Аэроэкспресс Казань-Аэропорт",
-            "Price": 550,
-            "Company": 3,
-            "Arrival": "2025-03-01T09:00:00Z",
-            "Departure": "2025-03-01T08:30:00Z",
-            "PlaceCount": 80,
-            "ArrivalPoint": 7,
-            "DeparturePoint": 8,
-            "TransportingMean": [
+            "price": 550,
+            "company": 3,
+            "arrival": "2025-03-01T09:00:00Z",
+            "departure": "2025-03-01T08:30:00Z",
+            "placeCount": 80,
+            "arrivalPoint": 7,
+            "departurePoint": 8,
+            "transportingMean": [
                 4
             ]
         },
