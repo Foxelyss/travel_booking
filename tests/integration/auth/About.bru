@@ -24,7 +24,7 @@ tests {
     expect(res.status).to.equal(200);
   });
   
-  test("Content of Point should be the same", ()=>{
+  test("Content of Account should be the same", ()=>{
     expect(res.body).to.include(bru.getVar("account_check"));
   });
   
