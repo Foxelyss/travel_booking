@@ -30,7 +30,7 @@ namespace TravelBooking.Controllers
             var company = new Company
             {
                 Name = companyRegistration.name,
-                RegistrationAddress = companyRegistration.address,
+                RegistrationAddress = companyRegistration.registrationAddress,
                 Phone = companyRegistration.phone,
                 Inn = companyRegistration.INN
             };
