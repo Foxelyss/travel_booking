@@ -105,19 +105,19 @@
         "company_creation": {
             "name": "Контора Тест",
             "phone": "123123312",
-            "address": "asdasd",
+            "registrationAddress": "asdasd",
             "INN": "asd"
         },
         "company_change": {
             "name": "Контора Тест",
             "phone": "123123312",
-            "address": "asdasd",
+            "registrationAddress": "asdasd",
             "INN": "asd"
         },
         "company_result": {
             "name": "Контора Тест",
             "phone": "123123312",
-            "address": "asdasd",
+            "registrationAddress": "asdasd",
             "INN": "asd"
         },
         "booking_name": "Test",
