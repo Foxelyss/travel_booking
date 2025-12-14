@@ -28,7 +28,7 @@ tests {
   });
   
   test("Content of Transport should be the same", ()=>{
-    expect(res.body).to.include(bru.getVar("transport_creation"));
+    expect(res.body).to.include(bru.getVar("transport_create_result"));
   });
   
   test("Content type is JSON", () => {
