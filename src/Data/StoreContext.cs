@@ -19,7 +19,6 @@ public class StoreContext(DbContextOptions<StoreContext> options) : DbContext(op
     {
         modelBuilder.Entity<Account>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<Account>().HasIndex(u => u.Phone).IsUnique();
-        modelBuilder.Entity<Account>().HasIndex(u => u.Username).IsUnique();
 
         modelBuilder.Entity<TransportingMeans>()
             .HasOne(tm => tm.TransportingMean)

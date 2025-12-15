@@ -90,8 +90,8 @@ public class AuthController : Controller
             Email = accountRegistration.email,
             PasswordHash = _hasher.HashPassword("", accountRegistration.password),
             Phone = accountRegistration.phone,
-            Username = accountRegistration.username ?? accountRegistration.email
         };
+
         try
         {
             _context.Accounts.Add(account);
