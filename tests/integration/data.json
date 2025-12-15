@@ -30,7 +30,7 @@
             "name": "Автобусом"
         },
         "transport_creation": {
-            "Name": "Поезд Волгоград-Казань",
+            "name": "Поезд Волгоград-Казань",
             "Price": 13123.10,
             "Company": 1,
             "Arrival": "2012-12-31T22:00:00.000Z",
@@ -55,10 +55,10 @@
             "freePlaceCount": 132
         },
         "transport_change": {
-            "Name": "Поезд Волгоград-Казань 123"
+            "name": "Поезд Волгоград-Казань 123"
         },
         "transport_change_result": {
-            "Name": "Поезд Волгоград-Казань",
+            "name": "Поезд Волгоград-Казань",
             "Price": 13123.10,
             "Company": 1,
             "Arrival": "2012-12-31T22:00:00.000Z",
@@ -126,7 +126,7 @@
             "name": "Н"
         },
         "transport_creation": {
-            "Name": "Т",
+            "name": "Т",
             "Price": 0.01,
             "Company": 2,
             "Arrival": "2025-12-31T23:59:59.000Z",
@@ -139,10 +139,10 @@
             ]
         },
         "transport_change": {
-            "Name": "Т-изменён"
+            "name": "Т-изменён"
         },
         "transport_change_result": {
-            "Name": "Т",
+            "name": "Т",
             "Price": 0.01,
             "Company": 2,
             "Arrival": "2025-12-31T23:59:59.000Z",
@@ -209,7 +209,7 @@
             "name": "Транспорт"
         },
         "transport_creation": {
-            "Name": "Поезд Москва-Казань",
+            "name": "Поезд Москва-Казань",
             "Price": 15000.55,
             "Company": 2,
             "Arrival": "2025-02-01T12:00:00Z",
@@ -226,7 +226,7 @@
             "Price": 15000.55
         },
         "transport_change_result": {
-            "Name": "Поезд Москва-Казань",
+            "name": "Поезд Москва-Казань",
             "Price": 15000.55,
             "Company": 2,
             "Arrival": "2025-02-01T12:00:00Z",
@@ -291,7 +291,7 @@
             "name": "Троллейбус №7"
         },
         "transport_creation": {
-            "Name": "Аэроэкспресс Казань-Аэропорт",
+            "name": "Аэроэкспресс Казань-Аэропорт",
             "Price": 550,
             "Company": 3,
             "Arrival": "2025-03-01T09:00:00Z",
@@ -308,7 +308,7 @@
             "DeparturePoint": 8
         },
         "transport_change_result": {
-            "Name": "Аэроэкспресс Казань-Аэропорт",
+            "name": "Аэроэкспресс Казань-Аэропорт",
             "Price": 550,
             "Company": 3,
             "Arrival": "2025-03-01T09:00:00Z",
