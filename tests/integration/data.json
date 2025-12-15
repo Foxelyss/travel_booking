@@ -187,19 +187,19 @@
         "company_creation": {
             "name": "К",
             "phone": "7",
-            "address": "А",
+            "registrationAddress": "А",
             "inn": "1"
         },
         "company_change": {
             "name": "К",
             "phone": "7",
-            "address": "Б",
+            "registrationAddress": "Б",
             "inn": "1"
         },
         "company_result": {
             "name": "К",
             "phone": "7",
-            "address": "Б",
+            "registrationAddress": "Б",
             "inn": "1"
         },
         "booking_name": "И",
@@ -270,7 +270,7 @@
         "company_creation": {
             "name": "Компания Верхняя",
             "phone": "89998887766",
-            "address": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
+            "registrationAddress": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
             "inn": "128128128128128"
         },
         "company_change": {
@@ -279,7 +279,7 @@
         "company_result": {
             "name": "Компания Верхняя",
             "phone": "89998887766",
-            "address": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
+            "registrationAddress": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
             "inn": "128128128128128"
         },
         "booking_name": "ФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФ",
@@ -293,7 +293,7 @@
         "account_password": "123456",
         "account_phone": "78889997766",
         "account_check": {
-            "phone": "79995553311",
+            "phone": "78889997766",
             "email": "edit@test.com"
         },
         "point_creation": {
@@ -352,17 +352,17 @@
         "company_creation": {
             "name": "Транспорт Плюс",
             "phone": "89992223344",
-            "address": "ул. Механизаторов, 19",
+            "registrationAddress": "ул. Механизаторов, 19",
             "inn": "111222333"
         },
         "company_change": {
             "phone": "80000000000",
-            "address": "ул. Комбайнёров, 88"
+            "registrationAddress": "ул. Комбайнёров, 88"
         },
         "company_result": {
             "name": "Транспорт Плюс",
             "phone": "80000000000",
-            "address": "ул. Комбайнёров, 88",
+            "registrationAddress": "ул. Комбайнёров, 88",
             "inn": "111222333"
         },
         "booking_name": "Сергей",
