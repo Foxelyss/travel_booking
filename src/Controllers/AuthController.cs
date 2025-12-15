@@ -109,7 +109,16 @@ public class AuthController : Controller
     [Authorize()]
     public IResult AboutUser()
     {
-        return Results.Ok(_context.Accounts.Find(HttpContext.User.GetGuid()));
+        var user = _context.Accounts.Find(HttpContext.User.GetGuid());
+
+        if (user == null) { return Results.Forbid(); }
+
+        return Results.Ok(new
+        {
+            user.Id,
+            user.Email,
+            user.Phone,
+        });
     }
 
     [HttpGet("logout")]

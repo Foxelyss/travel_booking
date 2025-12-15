@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace TravelBooking.Models;
 
@@ -14,6 +13,6 @@ public class Account
     [Required, MaxLength(128)]
     public required string Email { get; set; }
 
-    [Required, MaxLength(255), JsonIgnore]
+    [Required, MaxLength(255)]
     public required string PasswordHash { get; set; }
 }
