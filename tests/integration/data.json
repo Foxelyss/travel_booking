@@ -64,8 +64,8 @@
             "Arrival": "2012-12-31T22:00:00.000Z",
             "Departure": "2012-12-31T22:00:00.000Z",
             "PlaceCount": 132,
-            "ArrivalPoint": 1,
-            "DeparturePoint": 2,
+            "arrivalPointId": 1,
+            "departurePointId": 2,
             "TransportingMean": [
                 1,
                 2
@@ -148,10 +148,10 @@
             "Arrival": "2025-12-31T23:59:59.000Z",
             "Departure": "2025-12-31T00:00:00.000Z",
             "PlaceCount": 1,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
+            "ArrivalPoint": 2,
+            "DeparturePoint": 1,
             "TransportingMean": [
-                3
+                2
             ]
         },
         "company_creation": {
@@ -232,10 +232,11 @@
             "Arrival": "2025-02-01T12:00:00Z",
             "Departure": "2025-02-01T03:00:00Z",
             "PlaceCount": 300,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
+            "ArrivalPoint": 1,
+            "DeparturePoint": 2,
             "TransportingMean": [
-                3
+                2,
+                1
             ]
         },
         "company_creation": {
@@ -293,7 +294,7 @@
         "transport_creation": {
             "name": "Аэроэкспресс Казань-Аэропорт",
             "Price": 550,
-            "Company": 3,
+            "Company": 2,
             "Arrival": "2025-03-01T09:00:00Z",
             "Departure": "2025-03-01T08:30:00Z",
             "PlaceCount": 80,
