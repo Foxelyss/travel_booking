@@ -5,8 +5,7 @@
         "account_phone": "8800",
         "account_check": {
             "phone": "8800",
-            "email": "123@asd.com",
-            "username": "123@asd.com"
+            "email": "123@asd.com"
         },
         "point_creation": {
             "name": "Волгоград",
@@ -106,19 +105,19 @@
             "name": "Контора Тест",
             "phone": "123123312",
             "registrationAddress": "asdasd",
-            "INN": "asd"
+            "inn": "asd"
         },
         "company_change": {
             "name": "Контора Тест",
             "phone": "123123312",
             "registrationAddress": "asdasd",
-            "INN": "asd"
+            "inn": "asd"
         },
         "company_result": {
             "name": "Контора Тест",
             "phone": "123123312",
             "registrationAddress": "asdasd",
-            "INN": "asd"
+            "inn": "asd"
         },
         "booking_name": "Test",
         "booking_surname": "test",
@@ -132,8 +131,7 @@
         "account_phone": "1",
         "account_check": {
             "phone": "1",
-            "email": "min@a.com",
-            "username": "u"
+            "email": "min@a.com"
         },
         "point_creation": {
             "name": "А",
@@ -190,19 +188,19 @@
             "name": "К",
             "phone": "7",
             "address": "А",
-            "INN": "1"
+            "inn": "1"
         },
         "company_change": {
             "name": "К",
             "phone": "7",
             "address": "Б",
-            "INN": "1"
+            "inn": "1"
         },
         "company_result": {
             "name": "К",
             "phone": "7",
             "address": "Б",
-            "INN": "1"
+            "inn": "1"
         },
         "booking_name": "И",
         "booking_surname": "Й",
@@ -216,8 +214,7 @@
         "account_phone": "79999999999",
         "account_check": {
             "phone": "70000000000",
-            "email": "upperbound@test.com",
-            "username": "ББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББББ"
+            "email": "upperbound@test.com"
         },
         "point_creation": {
             "name": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
@@ -274,16 +271,16 @@
             "name": "Компания Верхняя",
             "phone": "89998887766",
             "address": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
-            "INN": "128128128128128"
+            "inn": "128128128128128"
         },
         "company_change": {
-            "INN": "128128128128128"
+            "inn": "128128128128128"
         },
         "company_result": {
             "name": "Компания Верхняя",
             "phone": "89998887766",
             "address": "АААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА",
-            "INN": "128128128128128"
+            "inn": "128128128128128"
         },
         "booking_name": "ФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФ",
         "booking_surname": "ФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФ",
@@ -297,8 +294,7 @@
         "account_phone": "78889997766",
         "account_check": {
             "phone": "79995553311",
-            "email": "edit@test.com",
-            "username": "ИмяПользователя"
+            "email": "edit@test.com"
         },
         "point_creation": {
             "name": "Ижевск",
@@ -357,7 +353,7 @@
             "name": "Транспорт Плюс",
             "phone": "89992223344",
             "address": "ул. Механизаторов, 19",
-            "INN": "111222333"
+            "inn": "111222333"
         },
         "company_change": {
             "phone": "80000000000",
@@ -367,7 +363,7 @@
             "name": "Транспорт Плюс",
             "phone": "80000000000",
             "address": "ул. Комбайнёров, 88",
-            "INN": "111222333"
+            "inn": "111222333"
         },
         "booking_name": "Сергей",
         "booking_surname": "Иванов",
