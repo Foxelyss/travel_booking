@@ -78,14 +78,14 @@ jobs:
         with:
           node-version: '25'
 
+      - name: Seed tests
+        run: node tests/seed.js
+
       - name: Install Bruno CLI
         run: npm install -g @usebruno/cli
       
       - name: Create reports directory
         run: mkdir -p reports
-
-      - name: Seed tests
-        run: node tests/seed.js
       
       - name: Run Bruno tests
         env:
