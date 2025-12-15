@@ -57,6 +57,7 @@ for (let company of companies) {
         "method": "POST",
         "mode": "cors"
     });
+    console.log(response);
 }
 
 
