@@ -52,37 +52,7 @@
             "companyId": 1,
             "price": 13123.1,
             "placeCount": 132,
-            "freePlaceCount": 132,
-            "departurePoint": {
-                "id": 2,
-                "name": "Волгоград",
-                "region": "Волгоградская область",
-                "city": "г. Волгоград"
-            },
-            "arrivalPoint": {
-                "id": 1,
-                "name": "Казань",
-                "region": "Казанская область",
-                "city": "г. Казань"
-            },
-            "company": {
-                "id": 1,
-                "name": "ООО Лана",
-                "inn": "123123",
-                "registrationAddress": "г. Томск",
-                "phone": "8 963 312 75 66"
-            },
-            "companyName": null,
-            "transportingMeans": [
-                {
-                    "id": 1,
-                    "name": "Ж/Д"
-                },
-                {
-                    "id": 2,
-                    "name": "Автобусом"
-                }
-            ]
+            "freePlaceCount": 132
         },
         "transport_change": {
             "Name": "Поезд Волгоград-Казань 123"
@@ -162,10 +132,10 @@
             "Arrival": "2025-12-31T23:59:59.000Z",
             "Departure": "2025-12-31T00:00:00.000Z",
             "PlaceCount": 1,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
+            "ArrivalPoint": 2,
+            "DeparturePoint": 1,
             "TransportingMean": [
-                3
+                2
             ]
         },
         "transport_change": {
@@ -245,10 +215,11 @@
             "Arrival": "2025-02-01T12:00:00Z",
             "Departure": "2025-02-01T03:00:00Z",
             "PlaceCount": 300,
-            "ArrivalPoint": 3,
-            "DeparturePoint": 4,
+            "ArrivalPoint": 1,
+            "DeparturePoint": 2,
             "TransportingMean": [
-                3
+                2,
+                1
             ]
         },
         "transport_change": {
@@ -326,10 +297,10 @@
             "Arrival": "2025-03-01T09:00:00Z",
             "Departure": "2025-03-01T08:30:00Z",
             "PlaceCount": 80,
-            "ArrivalPoint": 5,
-            "DeparturePoint": 6,
+            "ArrivalPoint": 2,
+            "DeparturePoint": 1,
             "TransportingMean": [
-                4
+                2
             ]
         },
         "transport_change": {
