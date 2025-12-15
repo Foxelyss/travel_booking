@@ -34,8 +34,8 @@ for (let point of points) {
 }
 
 let companies = [
-    { name: 'ООО Лана', INN: '123123', address: 'г. Томск', phone: '8 963 312 75 66' },
-    { name: 'ООО РЖД', INN: '12312389', address: 'г. Москва', phone: '8 123 312 75 66' },
+    { name: 'ООО Лана', INN: '123123', registrationAddress: 'г. Томск', phone: '8 963 312 75 66' },
+    { name: 'ООО РЖД', INN: '12312389', registrationAddress: 'г. Москва', phone: '8 123 312 75 66' },
 ];
 
 for (let company of companies) {
@@ -57,7 +57,6 @@ for (let company of companies) {
         "method": "POST",
         "mode": "cors"
     });
-    console.log(response);
 }
 
 
