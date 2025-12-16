@@ -58,18 +58,14 @@
             "name": "Поезд Волгоград-Казань 123"
         },
         "transport_change_result": {
-            "name": "Поезд Волгоград-Казань",
+            "name": "Поезд Волгоград-Казань 123",
             "Price": 13123.10,
             "Company": 1,
             "Arrival": "2012-12-31T22:00:00.000Z",
             "Departure": "2012-12-31T22:00:00.000Z",
             "PlaceCount": 132,
             "arrivalPointId": 1,
-            "departurePointId": 2,
-            "TransportingMean": [
-                1,
-                2
-            ]
+            "departurePointId": 2
         },
         "company_creation": {
             "name": "Контора Тест",
@@ -142,15 +138,15 @@
             "name": "Т-изменён"
         },
         "transport_change_result": {
-            "name": "Т",
-            "Price": 0.01,
-            "Company": 2,
-            "Arrival": "2025-12-31T23:59:59.000Z",
-            "Departure": "2025-12-31T00:00:00.000Z",
-            "PlaceCount": 1,
-            "ArrivalPoint": 2,
-            "DeparturePoint": 1,
-            "TransportingMean": [
+            "name": "Т-изменён",
+            "price": 0.01,
+            "company": 2,
+            "arrival": "2025-12-31T23:59:59.000Z",
+            "departure": "2025-12-31T00:00:00.000Z",
+            "placeCount": 1,
+            "arrivalPoint": 2,
+            "departurePoint": 1,
+            "transportingMean": [
                 2
             ]
         },
