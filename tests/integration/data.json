@@ -331,7 +331,7 @@
             "companyId": 2,
             "price": 550,
             "placeCount": 80,
-            "freePlaceCount": 80,
+            "freePlaceCount": 80
         },
         "transport_change": {
             "ArrivalPoint": 7,
