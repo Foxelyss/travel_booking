@@ -59,11 +59,11 @@
         },
         "transport_change_result": {
             "name": "Поезд Волгоград-Казань 123",
-            "Price": 13123.10,
-            "Company": 1,
-            "Arrival": "2012-12-31T22:00:00.000Z",
-            "Departure": "2012-12-31T22:00:00.000Z",
-            "PlaceCount": 132,
+            "price": 13123.10,
+            "company": 1,
+            "arrival": "2012-12-31T22:00:00.000Z",
+            "departure": "2012-12-31T22:00:00.000Z",
+            "placeCount": 132,
             "arrivalPointId": 1,
             "departurePointId": 2
         },
@@ -133,6 +133,17 @@
             "TransportingMean": [
                 2
             ]
+        },
+        "transport_create_result": {
+            "name": "Т",
+            "departure": "2025-12-31T00:00:00Z",
+            "arrival": "2025-12-31T23:59:59Z",
+            "departurePointId": 1,
+            "arrivalPointId": 2,
+            "companyId": 2,
+            "price": 0.01,
+            "placeCount": 1,
+            "freePlaceCount": 1
         },
         "transport_change": {
             "name": "Т-изменён"
@@ -218,6 +229,17 @@
                 1
             ]
         },
+        "transport_create_result": {
+            "name": "Поезд Москва-Казань",
+            "departure": "2025-02-01T03:00:00Z",
+            "arrival": "2025-02-01T12:00:00Z",
+            "departurePointId": 2,
+            "arrivalPointId": 1,
+            "companyId": 2,
+            "price": 15000.55,
+            "placeCount": 300,
+            "freePlaceCount": 300
+        },
         "transport_change": {
             "Price": 15000.55
         },
@@ -299,6 +321,17 @@
             "TransportingMean": [
                 2
             ]
+        },
+        "transport_create_result": {
+            "name": "Аэроэкспресс Казань-Аэропорт",
+            "departure": "2025-03-01T08:30:00Z",
+            "arrival": "2025-03-01T09:00:00Z",
+            "departurePointId": 1,
+            "arrivalPointId": 2,
+            "companyId": 2,
+            "price": 550,
+            "placeCount": 80,
+            "freePlaceCount": 80,
         },
         "transport_change": {
             "ArrivalPoint": 7,
