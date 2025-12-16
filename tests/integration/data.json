@@ -60,7 +60,7 @@
         "transport_change_result": {
             "name": "Поезд Волгоград-Казань 123",
             "price": 13123.10,
-            "company": 1,
+            "companyId": 1,
             "arrival": "2012-12-31T22:00:00.000Z",
             "departure": "2012-12-31T22:00:00.000Z",
             "placeCount": 132,
@@ -151,7 +151,7 @@
         "transport_change_result": {
             "name": "Т-изменён",
             "price": 0.01,
-            "company": 2,
+            "companyId": 2,
             "arrival": "2025-12-31T23:59:59.000Z",
             "departure": "2025-12-31T00:00:00.000Z",
             "placeCount": 1,
