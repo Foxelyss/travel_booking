@@ -33,6 +33,12 @@ services:
     networks:
       - travel
       - mega-main
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 96M
+
 
   travel-booking-db:
     image: postgres:18
@@ -53,6 +59,11 @@ services:
     restart: unless-stopped
     networks:
       - travel
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 48M
 
 volumes:
   misc_data:
